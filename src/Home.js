@@ -47,6 +47,7 @@ export default function Home() {
             Discover More
           </button>
         </div>
+        {/* #test */}
       </div>
       <div>
         <section
