@@ -11,3 +11,47 @@ body {
 .bg-primary {
   background-color: rgb(11, 12, 11);
 }
+.flip-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.flip-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flip-card:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front,
+.flip-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.flip-front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+  background-color: #B31F7E;
+  color: #B31F7E;
+  z-index: 1;
+}
