@@ -7,23 +7,32 @@ import About from "./About";
 import Journey from "./Journey";
 import Contact from "./Contact";
 import Footer from "./Footer";
+import { useScrollMemory } from "./hooks/useScrollMemory";
+
+function AppContent() {
+  useScrollMemory();
+
+  return (
+    <div>
+      <Navbar />
+      <div>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/solutions" element={<Solutions />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/journey" element={<Journey />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </div>
+      <Footer />
+    </div>
+  );
+}
 
 function App() {
   return (
     <BrowserRouter>
-      <div>
-        <Navbar />
-        <div>
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/solutions" element={<Solutions />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/journey" element={<Journey />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </div>
-        <Footer />
-      </div>
+      <AppContent />
     </BrowserRouter>
   );
 }
