@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "keen-slider/keen-slider.min.css";
 body {
   margin: 0px;
   background-color: rgb(11, 12, 11);
@@ -51,7 +53,144 @@ body {
 
 .flip-back {
   transform: rotateY(180deg);
-  background-color: #B31F7E;
+  background-color: #9333ea;
   color: #B31F7E;
   z-index: 1;
 }
+
+/* Slide card base */
+.carousel-card {
+  height: 320px;
+  width: 100%;
+  background-color: #3b82f6; /* blue-500 */
+  color: white;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  transition: transform 0.5s ease, z-index 0.5s ease, opacity 0.5s ease;
+}
+
+/* Center (main visible) slide */
+.glide__slide--active .carousel-card {
+  transform: scale(1.1);
+  z-index: 3;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Left/right (next/prev) slides */
+.glide__slide--next .carousel-card,
+.glide__slide--prev .carousel-card {
+  transform: scale(0.9) rotateY(15deg);
+  z-index: 2;
+  opacity: 0.7;
+}
+
+/* All other slides */
+.glide__slide:not(.glide__slide--active):not(.glide__slide--next):not(.glide__slide--prev) .carousel-card {
+  transform: scale(0.8);
+  opacity: 0.3;
+  z-index: 1;
+}
+
+[class^="number-slide"],
+[class*=" number-slide"] {
+  background: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  color: #fff;
+  font-weight: 500;
+  height: 200px;
+  max-height: 100vh;
+}
+
+.number-slide1 {
+  background: rgb(64, 175, 255);
+  background: linear-gradient(
+    128deg,
+    rgba(64, 175, 255, 1) 0%,
+    rgba(63, 97, 255, 1) 100%
+  );
+}
+
+.number-slide2 {
+  background: rgb(255, 75, 64);
+  background: linear-gradient(
+    128deg,
+    rgba(255, 154, 63, 1) 0%,
+    rgba(255, 75, 64, 1) 100%
+  );
+}
+
+.number-slide3 {
+  background: rgb(182, 255, 64);
+  background: linear-gradient(
+    128deg,
+    rgba(182, 255, 64, 1) 0%,
+    rgba(63, 255, 71, 1) 100%
+  );
+  background: linear-gradient(
+    128deg,
+    rgba(189, 255, 83, 1) 0%,
+    rgba(43, 250, 82, 1) 100%
+  );
+}
+
+.number-slide4 {
+  background: rgb(64, 255, 242);
+  background: linear-gradient(
+    128deg,
+    rgba(64, 255, 242, 1) 0%,
+    rgba(63, 188, 255, 1) 100%
+  );
+}
+
+.number-slide5 {
+  background: rgb(255, 64, 156);
+  background: linear-gradient(
+    128deg,
+    rgba(255, 64, 156, 1) 0%,
+    rgba(255, 63, 63, 1) 100%
+  );
+}
+
+.number-slide6 {
+  background: rgb(64, 76, 255);
+  background: linear-gradient(
+    128deg,
+    rgba(64, 76, 255, 1) 0%,
+    rgba(174, 63, 255, 1) 100%
+  );
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+.scene {
+  width: 260px;
+  height: 200px;
+  perspective: 1000px;
+  position: relative;
+}
+.scene .carousel.keen-slider {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: visible;
+  transform: translateZ(-288px);
+  transform-style: preserve-3d;
+}
+.carousel__cell {
+  position: absolute;
+  width: 240px;
+  left: 10px;
+  height: 200px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+
+

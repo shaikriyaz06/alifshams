@@ -12,10 +12,88 @@ function Navbar() {
 
   const navItems = [
     { to: "/", label: "Home" },
-    { to: "/solutions", label: "Solutions" },
+    { to: "/solutions", label: "Solutions", hasDropdown: true },
     { to: "/about", label: "About Us" },
     { to: "/journey", label: "Be a Part of Our Journey" },
     { to: "/contact", label: "Contact Us" },
+  ];
+
+  const solutionsDropdown = [
+    {
+      to: "/solutions/web-development",
+      label: "AI Consulting",
+      submenu: [
+        {
+          to: "/solutions/web-development/frontend",
+          label: "AI Strategy - Development & Implementation",
+        },
+        {
+          to: "/solutions/web-development/backend",
+          label: "Custom AI Development",
+        },
+        {
+          to: "/solutions/web-development/fullstack",
+          label: " Generative AI Development & Services",
+        },
+        { to: "/solutions/web-development/frontend", label: "Agentic AI" },
+        {
+          to: "/solutions/web-development/backend",
+          label: "Ethical AI and Compliance",
+        },
+        {
+          to: "/solutions/web-development/fullstack",
+          label: "AI Research & Training",
+        },
+      ],
+    },
+    {
+      to: "/solutions/mobile-apps",
+      label: "Business and Technology Consulting",
+      submenu: [
+        {
+          to: "/solutions/mobile-apps/ios",
+          label: "Microsoft-related Services",
+        },
+        {
+          to: "/solutions/mobile-apps/android",
+          label: "Website Design & Development",
+        },
+        { to: "/solutions/mobile-apps/react-native", label: "Cloud Solutions" },
+        { to: "/solutions/mobile-apps/ios", label: "Cybersecurity" },
+        {
+          to: "/solutions/mobile-apps/android",
+          label: "Strategy & Digital Transformation",
+        },
+        {
+          to: "/solutions/mobile-apps/react-native",
+          label: "Governance, Risk & Compliance",
+        },
+      ],
+    },
+    {
+      to: "/solutions/cloud-services",
+      label: "Digital Marketing",
+      submenu: [
+        {
+          to: "/solutions/cloud-services/aws",
+          label: "Demand Generation & Sales Pipelines",
+        },
+        { to: "/solutions/cloud-services/azure", label: "SEO" },
+        {
+          to: "/solutions/cloud-services/migration",
+          label: "Social Media Marketing (SMM)",
+        },
+        {
+          to: "/solutions/cloud-services/aws",
+          label: "Email & Content Marketing",
+        },
+        { to: "/solutions/cloud-services/azure", label: "Video Marketing" },
+        {
+          to: "/solutions/cloud-services/migration",
+          label: "Influencer Marketing",
+        },
+      ],
+    }
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -23,26 +101,26 @@ function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
-      if (currentScrollY > 100) {
-        // Show dynamic navbar when scrolled past 100px
+
+      if (currentScrollY <= 10) {
+        setIsVisible(false);
+      } else if (currentScrollY < lastScrollY) {
         setIsVisible(true);
       } else {
-        // Hide dynamic navbar when at the top
         setIsVisible(false);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [lastScrollY]);
 
-  const OriginalNavbarContent = () => (
+  const NavbarContent = () => (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex justify-between items-center h-[85px]">
         {/* Logo */}
@@ -51,83 +129,82 @@ function Navbar() {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-4">
-          {navItems.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className={`text-white text-md font-semibold px-4 py-2 transition-all duration-300 ${
-                isActive(item.to)
-                  ? "!text-[#D66CAE] font-bold "
-                  : "hover:text-[#D66CAE]"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
+        <nav className="hidden md:block">
+          <ul className="flex items-center space-x-6 h-full">
+            {navItems.map((item) => (
+              <li key={item.to} className={`relative group`}>
+                <Link
+                  to={item.to}
+                  className={`flex items-center h-[85px] px-4 text-md font-semibold transition-all duration-300 ${
+                    isActive(item.to)
+                      ? "text-[#D66CAE] font-bold"
+                      : "text-white hover:text-[#D66CAE]"
+                  }`}
+                >
+                  {item.label}
+                  {item.hasDropdown && (
+                    <svg
+                      className="ml-1 w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  )}
+                </Link>
 
-        {/* Mobile Toggle */}
-        <div className="md:hidden flex items-center">
-          <button
-            onClick={toggleMenu}
-            className="inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-white/20 transition duration-200"
-          >
-            <svg
-              className="h-8 w-8"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {isMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+                {/* Dropdown only for Solutions */}
+                {item.hasDropdown && (
+                  <div className="absolute top-full left-0 mt-0 hidden group-hover:block bg-white shadow-lg py-2 min-w-[250px] z-50">
+                    {solutionsDropdown.map((dropdownItem) => (
+                      <div
+                        key={dropdownItem.to}
+                        className="relative group/submenu"
+                      >
+                        <Link
+                          to={dropdownItem.to}
+                          className="flex items-center justify-between px-4 py-2 text-gray-800 hover:bg-gray-100 hover:text-purple-600 transition-colors duration-200"
+                        >
+                          {dropdownItem.label}
+                          <svg
+                            className="w-4 h-4"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </Link>
 
-  const DynamicNavbarContent = () => (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex justify-between items-center h-[85px]">
-        {/* Logo */}
-        <div className="flex-shrink-0 flex items-center">
-          <img src={logo} className="h-20 w-auto" alt="Logo" />
-        </div>
+                        {/* Submenu */}
+                        <div className="absolute left-full top-0 hidden group-hover/submenu:block bg-white shadow-lg py-2 min-w-[280px] z-60">
+                          {dropdownItem.submenu.map((subItem) => (
+                            <Link
+                              key={subItem.to}
+                              to={subItem.to}
+                              className="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:text-purple-600 transition-colors duration-200"
+                            >
+                              {subItem.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-4">
-          {navItems.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className={`text-md font-semibold px-4 py-2 transition-all duration-300 ${
-                isActive(item.to)
-                  ? "!text-black font-bold "
-                  : "text-white hover:text-black"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
-
-        {/* Mobile Toggle */}
+        {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center">
           <button
             onClick={toggleMenu}
@@ -164,23 +241,27 @@ function Navbar() {
 
   return (
     <>
-      {/* Original Fixed Navbar - Always Visible */}
-      <nav className="fixed top-0 left-0 w-full bg-[#482A7A]/80 backdrop-blur-md shadow-xl z-40 border-b border-white/10">
-        <OriginalNavbarContent />
-      </nav>
+      {/* Original Navbar (fixed at top) */}
+      {lastScrollY <= 10 && (
+        <nav className="fixed top-0 left-0 w-full bg-[#482A7A]/80 backdrop-blur-md shadow-xl z-40 border-b border-white/10">
+          <NavbarContent />
+        </nav>
+      )}
 
-      {/* Dynamic Gradient Navbar - Appears on Scroll */}
-      <nav 
-        className={`fixed top-0 left-0 w-full bg-gradient-to-r from-purple-600 to-[#B31F7E] backdrop-blur-md shadow-xl z-50 border-b border-white/10 transition-transform duration-300 ${
-          isVisible ? 'translate-y-0' : '-translate-y-full'
+      {/* Scrolling Navbar */}
+      <nav
+        className={`fixed top-0 left-0 w-full bg-gradient-to-r from-purple-600 to-[#B31F7E] backdrop-blur-md shadow-xl z-50 border-b border-white/10 transform transition-all duration-500 ease-in-out ${
+          isVisible
+            ? "translate-y-0 opacity-100"
+            : "-translate-y-full opacity-0"
         }`}
       >
-        <DynamicNavbarContent />
+        <NavbarContent />
       </nav>
 
-      {/* Mobile Menu - Only for dynamic navbar */}
+      {/* Mobile Menu */}
       {isMenuOpen && isVisible && (
-        <div className="md:hidden fixed top-[85px] left-0 w-full backdrop-blur-lg bg-gradient-to-r from-purple-600 to-[#B31F7E] py-4 px-4 space-y-2 shadow-inner z-50">
+        <div className="md:hidden fixed top-[85px] left-0 w-full backdrop-blur-lg bg-gradient-to-r from-purple-600 to-[#B31F7E] py-4 px-4 space-y-2 shadow-inner z-50 transition-all duration-500 ease-in-out animate-fade-in">
           {navItems.map((item) => (
             <Link
               key={item.to}

@@ -2,6 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import heroVideo from "./assets/hero_video.mp4";
 import { motion, useScroll, useAnimation, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import Glide from "@glidejs/glide";
+import "@glidejs/glide/dist/css/glide.core.min.css";
+import "@glidejs/glide/dist/css/glide.theme.min.css";
 import Masonry from "@mui/lab/Masonry";
 import Paper from "@mui/material/Paper";
 import telcomImage from "../src/assets/telcom.avif";
@@ -10,12 +13,67 @@ import banking from "../src/assets/banking1.avif";
 import software from "../src/assets/software.avif";
 import education from "../src/assets/education.avif";
 import { styled } from "@mui/material/styles";
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
+import industriesImage from "../src/assets/industries1.png";
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  EffectCoverflow,
+  Autoplay,
+  Navigation,
+  Pagination,
+} from "swiper/modules";
+import Carouselcomponent from "./carousel";
+const engagementPhases = [
+  { title: "1. Discover", description: "Assess needs, baseline KPIs" },
+  { title: "2. Design", description: "Co-create blueprints & use cases" },
+  { title: "3. Develop", description: "Agile prototyping & MVP builds" },
+  { title: "4. Deploy", description: "Launch & onboard systems" },
+  { title: "5. Enable", description: "Train users & embed governance" },
+  { title: "6. Evolve", description: "Continuously optimize" },
+];
+
+const slides = engagementPhases.map((phase, i) => (
+  <motion.div
+    key={i}
+    whileHover={{ scale: 1.05 }}
+    className="bg-white rounded-xl shadow-xl p-6 w-80 h-60 flex flex-col justify-center items-center text-center"
+  >
+    <h3 className="text-xl font-semibold text-blue-700 mb-2">{phase.title}</h3>
+    <p className="text-gray-600">{phase.description}</p>
+  </motion.div>
+));
+const carousel = (slider) => {
+  const z = 300;
+  function rotate() {
+    const deg = 360 * slider.track.details.progress;
+    slider.container.style.transform = `translateZ(-${z}px) rotateY(${-deg}deg)`;
+  }
+  slider.on("created", () => {
+    const deg = 360 / slider.slides.length;
+    slider.slides.forEach((element, idx) => {
+      element.style.transform = `rotateY(${deg * idx}deg) translateZ(${z}px)`;
+    });
+    rotate();
+  });
+  slider.on("detailsChanged", rotate);
+};
 
 export default function Home() {
+  const [sliderRef] = useKeenSlider(
+    {
+      loop: true,
+      selector: ".carousel__cell",
+      renderMode: "custom",
+      mode: "free-snap",
+    },
+    [carousel]
+  );
+
   const sectionRef = useRef(null);
   const newsRef = useRef(null);
   const industriesRef = useRef(null);
-
+  const glideRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start center", "center start"],
@@ -25,6 +83,7 @@ export default function Home() {
     target: newsRef,
     offset: ["end end", "end start"],
   });
+  const [activeIndex, setActiveIndex] = useState(0);
   const leftX = useTransform(scrollYProgress, [0, 1], ["70px", "-50px"]);
   const rightX = useTransform(scrollYProgress, [0, 1], ["-50px", "70px"]);
   const translateY = useTransform(newsScrollProgress, [0, 0], ["0%", "0%"]);
@@ -34,7 +93,7 @@ export default function Home() {
       icon: "📡",
       img: telcomImage,
       description:
-        "Innovative solutions for telecommunications infrastructure and services",
+        "Deploy customer churn prediction, AI for call routing, fraud detection, network optimization, and predictive maintenance for telecom giants.",
       to: "/telecom",
       color: "blue",
     },
@@ -43,7 +102,7 @@ export default function Home() {
       icon: "🏥",
       img: healthcare,
       description:
-        "Digital transformation in healthcare delivery and management",
+        "Support health systems, hospitals, and startups with AI-driven diagnostics, virtual health platforms, operational analytics, and secure data governance models.",
       to: "/healthcare",
       color: "green",
     },
@@ -51,7 +110,8 @@ export default function Home() {
       title: "Banking & Finance",
       icon: "🏦",
       img: banking,
-      description: "Secure and efficient financial technology solutions",
+      description:
+        "Partner with banks and fintechs to deliver robo-advisory systems, fraud detection, credit risk scoring, and AI-driven personal finance platforms.",
       to: "/banking",
       color: "purple",
     },
@@ -59,7 +119,8 @@ export default function Home() {
       title: "IT & Software",
       icon: "💻",
       img: software,
-      description: "Cutting-edge software development and IT services",
+      description:
+        "Assist product companies and service providers in embedding AI into software delivery, DevOps, product lifecycle, and customer support using cloud-native and AI-first tooling.",
       to: "/it-software",
       color: "pink",
     },
@@ -67,7 +128,8 @@ export default function Home() {
       title: "Education",
       icon: "🎓",
       img: education,
-      description: "Modern educational technology and learning platforms",
+      description:
+        "Co-create AI-enabled learning platforms, adaptive assessments, digital classrooms, and tools for remote education delivery with robust data insights.",
       to: "/education",
       color: "yellow",
     },
@@ -85,8 +147,67 @@ export default function Home() {
       backgroundColor: "#1A2027",
     }),
   }));
+  const cards = [
+    {
+      title: "🤖 AI Consulting",
+      points: [
+        "AI Strategy - Development & Implementation",
+        "Custom AI Development",
+        "Generative AI Development & Services",
+        "Agentic AI",
+        "Ethical AI and Compliance",
+        "AI Research & Training",
+      ],
+      content:
+        "We enable organizations to leverage Artificial Intelligence not just as a technology but as a strategic enabler. Our approach blends AI engineering, ethics, and business alignment.",
+    },
+    {
+      title: "📊 Business & Technology Consulting",
+      points: [
+        "Microsoft-related Services",
+        "Website Design & Development",
+        "Cloud Solutions",
+        "Cybersecurity",
+        "Strategy & Digital Transformation",
+        "Governance, Risk & Compliance",
+      ],
+      content:
+        "We help enterprises optimize their digital backbone, making them agile, compliant, and customer-centric.",
+    },
+    {
+      title: "📈 Digital Marketing",
+      points: [
+        "Demand Generation & Sales Pipelines",
+        "SEO",
+        "Social Media Marketing (SMM)",
+        "Email & Content Marketing",
+        "Video Marketing",
+        "Influencer Marketing",
+      ],
+      content:
+        "We use data, creativity, and technology to power marketing that delivers measurable demand and brand equity.",
+    },
+  ];
+  const [sliderInstanceRef, slider] = useKeenSlider({
+    initial: 0,
+    loop: true,
+    slides: {
+      perView: 1,
+      spacing: 15,
+    },
+    slideChanged(s) {
+      // log when needed
+    },
+  });
+
+  const goToSlide = (index) => {
+    if (slider.current) {
+      slider.current.moveToSlideRelative(index);
+    }
+  };
+
   return (
-    <>
+    <div className="bg-white">
       {/* Hero Section */}
       <div className="relative w-full h-[calc(100vh-73px)] mt-[73px]">
         <div className="absolute inset-0">
@@ -114,86 +235,77 @@ export default function Home() {
         </div>
       </div>
       <div>
-        <section
-          className="py-10 bg-[#ffffff] text-[#4b535d] relative overflow-hidden z-10"
-          ref={sectionRef}
-        >
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl text-[#B31F7E] font-bold text-center mb-4">
-              The ALIF Approach
-            </h2>
-            <div className="w-24 h-1 bg-black mx-auto mb-12"></div>
-
-            <div className="flex flex-col md:flex-row items-center gap-12">
-              <motion.div className="w-full md:w-1/2" style={{ x: leftX }}>
-                <h3 className="text-2xl font-bold mb-4 text-[#B31F7E]">
-                  Our Methodology
-                </h3>
-                <p className="text-lg mb-6 text-black leading-relaxed">
-                  The ALIF Approach represents our comprehensive methodology for
-                  delivering exceptional results. Our process combines
-                  innovative thinking with proven strategies to transform
-                  challenges into opportunities.
-                </p>
-                <p className="text-lg text-black  leading-relaxed">
-                  We focus on understanding your unique needs, developing
-                  tailored solutions, and implementing them with precision to
-                  ensure maximum impact and value.
-                </p>
-                <button className="mt-6 px-6 py-2 bg-[#B31F7E] text-white font-medium rounded-md hover:bg-emerald-600 transition-colors">
-                  Learn More
-                </button>
-              </motion.div>
-
-              <motion.div
-                className="w-full md:w-1/2 mt-8 md:mt-0"
-                style={{ x: rightX }}
-              >
-                <div className="h-80 bg-[rgba(255,255,255,0.05)] backdrop-blur-sm rounded-xl border border-emerald-900/30 shadow-xl flex items-center justify-center">
-                  <p className="text-[#B31F7E] text-xl">Diagram Placeholder</p>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
+        <div>
+          <Carouselcomponent />
+        </div>
+        <hr className="border border-gray-500" />
         <div className="relative">
           <section
-            className="sticky top-[73px] z-10 bg-gradient-to-b from-black via-[#202020] to-[#808080]"
+            className="z-10 px-10 pb-10"
             ref={newsRef}
+            style={{
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${industriesImage})`,
+            }}
           >
-            <div className="container mx-auto px-4 py-10 ">
-              <h2 className="text-4xl font-bold text-center mb-4 text-white">
-                Latest News & Bytes
+            <div className="container mx-auto px-4 pb-10 ">
+              <h2 className="text-4xl text-[#B31F7E] font-bold text-center mb-4">
+                Our Domains
               </h2>
-              <div className="w-24 h-1 bg-emerald-500 mx-auto mb-12"></div>
-
-              {/* Your extra text */}
-              <div className="text-white text-center text-lg max-w-3xl mx-auto">
-                <p className="mb-3">
-                  Our people are our greatest strength. Over 100 specialists
-                  around the world, our team works tirelessly to support clients
-                  irrespective of time zone.
-                </p>
-                <p className="mb-3">
-                  We create and implement award-winning marketing, lead
-                  generation and sales strategies. And we're 100% in-house.
-                </p>
-                <p>
-                  Let us take your business to the next level. Dubai. New York.
-                  London. Melbourne.
-                </p>
-              </div>
+              <div className="w-24 h-1 bg-black mx-auto"></div>
             </div>
+            <Swiper
+              effect="coverflow"
+              grabCursor={true}
+              slidesPerView={3}
+              centeredSlides={true}
+              initialSlide={1}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+              loop={true}
+              loopedSlides={3}
+              coverflowEffect={{
+                rotate: 30,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+              }}
+              modules={[EffectCoverflow, Autoplay, Navigation]}
+            >
+              {[...cards, ...cards].map((card, index) => (
+                <SwiperSlide key={index}>
+                  <div className="bg-purple-600  text-white rounded-xl shadow-lg h-96 p-10 flex flex-col items-start justify-center text-left border border-gray-300 ">
+                    <h3 className="text-xl font-bold mb-3">{card.title}</h3>
+                    <p className="text-sm font-semibold justify-center">
+                      {card.content}
+                    </p>
+                    <br />
+                    <ul className="list-disc ml-5 space-y-2 text-sm">
+                      {card.points.map((point, i) => (
+                        <li key={i}>{point}</li>
+                      ))}
+                    </ul>
+                    <button className="mt-4 text-sm bg-white text-[#B31F7E] font-bold px-4 py-2 rounded hover:bg-purple-100 transition-all">
+                      Know More →
+                    </button>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </section>
-
+          <hr className="border border-gray-500" />
           <motion.section
-            className="py-10 px-32 text-white w-full z-20 relative bg-gradient-to-b from-[#B31F7E] via-blue-400 to-purple-600"
-            style={{ y: translateY }}
-            ref={industriesRef}
+            className="py-10 px-20 text-white w-full z-20 relative bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${industriesImage})`,
+            }}
           >
-            <h2 className="text-4xl font-bold text-center mb-4 text-white">
+            <h2 className="text-4xl font-bold text-center mb-4 text-[#B31F7E]">
               Industries
             </h2>
+            <div className="w-24 h-1 bg-black mx-auto"></div>
             <Masonry
               columns={3}
               spacing={2}
@@ -201,6 +313,7 @@ export default function Home() {
               defaultColumns={3}
               defaultSpacing={1}
               sequential
+              className="py-2"
             >
               {industries.map((item, index) => (
                 <Item
@@ -232,7 +345,9 @@ export default function Home() {
                           {item.title}
                         </h3>
                         <div className="flex-1 flex items-start justify-center">
-                          <p className="text-center mb-1white">{item.description}</p>
+                          <p className="text-center mb-1white">
+                            {item.description}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -242,7 +357,139 @@ export default function Home() {
             </Masonry>
           </motion.section>
         </div>
+
+        {/* Why Join Us Section */}
+        <section className="py-16 bg-black">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-4 text-[#B31F7E]">
+              Why Alif Shams?
+            </h2>
+            <div className="w-24 h-1 bg-white mx-auto mb-12"></div>
+
+            <div className="relative flex flex-col md:flex-row items-center justify-center gap-12 max-w-6xl mx-auto">
+              {/* Benefits & Perks */}
+              <div className="text-white text-left flex-1">
+                {/* <div className="text-4xl mb-4">💰</div> */}
+                <h3 className="text-2xl font-semibold mb-4 text-[#B31F7E]">
+                  Benefits & Perks
+                </h3>
+                <ul className="text-gray-300 space-y-3 text-left inline-block">
+                  <li>
+                    • Market-aligned compensation with performance rewards
+                  </li>
+                  <li>• Remote/hybrid flexibility</li>
+                  <li>• Annual learning budgets (AI, Cloud, DevSecOps)</li>
+                  <li>• Mental health & wellness support</li>
+                </ul>
+              </div>
+
+              {/* Vertical Line */}
+              <div className="hidden md:block w-px h-64 bg-white"></div>
+
+              {/* Career Opportunities */}
+              <div className="text-white text-left flex-1">
+                {/* <div className="text-4xl mb-4">🚀</div> */}
+                <h3 className="text-2xl font-semibold mb-4 text-[#B31F7E]">
+                  Career Opportunities
+                </h3>
+                <ul className="text-gray-300 space-y-3 text-left inline-block">
+                  <li>
+                    • Work on breakthrough GenAI and enterprise AI projects
+                  </li>
+                  <li>
+                    • Opportunity to lead transformation mandates across sectors
+                  </li>
+                  <li>
+                    • Accelerated growth from contributor to practice leader
+                  </li>
+                  <li>
+                    • Open roles in consulting, engineering, marketing, and
+                    product strategy
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* <section className="py-16 bg-gradient-to-r from-[#482A7A] to-[#B31F7E]">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-4 text-white">
+              Get In Touch
+            </h2>
+            <div className="w-24 h-1 bg-white mx-auto mb-12"></div>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="text-white">
+                <h3 className="text-2xl font-semibold mb-6">Ready to Transform Your Business?</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <span className="text-2xl mr-4">📧</span>
+                    <span>contact@alif.com</span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="text-2xl mr-4">📞</span>
+                    <span>+1 (555) 123-4567</span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="text-2xl mr-4">📍</span>
+                    <span>123 Innovation Street, Tech City</span>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white rounded-xl p-8 shadow-xl">
+                <form className="space-y-4">
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B31F7E]"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Your Email"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B31F7E]"
+                  />
+                  <textarea
+                    placeholder="Your Message"
+                    rows="4"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B31F7E]"
+                  ></textarea>
+                  <button
+                    type="submit"
+                    className="w-full bg-[#B31F7E] text-white py-3 rounded-lg font-semibold hover:bg-[#482A7A] transition-colors"
+                  >
+                    Send Message
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section> */}
+        <section
+          className="py-16 bg-black"
+          // style={{
+          //   backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${industriesImage})`,
+          // }}
+        >
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-4xl font-bold mb-4 text-white">
+              Ready to Transform Your Business?
+            </h2>
+            <div className="w-24 h-1 bg-white mx-auto mb-8"></div>
+            <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
+              Join thousands of companies who trust ALIF to drive their digital
+              transformation and achieve exceptional results.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="px-8 py-4 bg-white text-[#B31F7E] font-semibold rounded-xl hover:bg-gray-100 transition-colors">
+                Get Started Today
+              </button>
+              <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-[#B31F7E] transition-colors">
+                Schedule a Consultation
+              </button>
+            </div>
+          </div>
+        </section>
       </div>
-    </>
+    </div>
   );
 }
