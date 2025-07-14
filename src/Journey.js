@@ -1,38 +1,37 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaBriefcase, FaGraduationCap, FaCode, FaChartLine, FaUserTie, FaPalette } from 'react-icons/fa';
+import { FaHandshake, FaUsers, FaRocket, FaLightbulb, FaShieldAlt, FaGlobe, FaChartLine, FaCogs } from 'react-icons/fa';
+import collabImage from './assets/healthcare.avif';
 
 const Journey = () => {
-  const opportunities = [
-    {
-      icon: <FaCode className="text-4xl text-[#B31F7E]" />,
-      title: 'Software Development',
-      positions: ['Full Stack Developer', 'Mobile App Developer', 'DevOps Engineer'],
-    },
-    {
-      icon: <FaChartLine className="text-4xl text-[#B31F7E]" />,
-      title: 'Data & Analytics',
-      positions: ['Data Scientist', 'Business Analyst', 'ML Engineer'],
-    },
-    {
-      icon: <FaUserTie className="text-4xl text-[#B31F7E]" />,
-      title: 'Business & Strategy',
-      positions: ['Project Manager', 'Business Consultant', 'Product Owner'],
-    },
-    {
-      icon: <FaPalette className="text-4xl text-[#B31F7E]" />,
-      title: 'Design & UX',
-      positions: ['UI/UX Designer', 'Product Designer', 'Visual Designer'],
-    },
+  const whyUsPoints = [
+    "Proven track record with 500+ successful AI implementations",
+    "Expert team with deep industry knowledge and technical expertise",
+    "End-to-end support from strategy to deployment and beyond",
+    "Cutting-edge AI technologies and innovative solutions",
+    "Agile methodology ensuring rapid delivery and iteration",
+    "Strong focus on ethical AI and compliance frameworks",
+    "Global reach with local execution and personalized service",
+    "Continuous learning and adaptation to emerging technologies"
   ];
 
-  const benefits = [
-    'Competitive Salary & Benefits',
-    'Remote Work Options',
-    'Professional Development',
-    'Health & Wellness Programs',
-    'Team Building Events',
-    'Career Growth Opportunities',
+  const collaborationSteps = [
+    {
+      step: "1. Initial Consultation",
+      description: "Schedule a discovery call to understand your needs and objectives"
+    },
+    {
+      step: "2. Whitelist Application",
+      description: "Submit your project details for our technical review and approval process"
+    },
+    {
+      step: "3. Startup Onboarding",
+      description: "Complete onboarding with dedicated account management and project setup"
+    },
+    {
+      step: "4. Collaboration Begins",
+      description: "Start working with our expert team on your transformation journey"
+    }
   ];
 
   return (
@@ -46,7 +45,7 @@ const Journey = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            Be a Part of Our Journey
+            Partner with ALIF
           </motion.h1>
           <motion.p 
             className="text-xl text-center max-w-3xl mx-auto text-gray-300"
@@ -54,87 +53,83 @@ const Journey = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Join our team of innovators and help shape the future of technology
+            Join forces with us to transform your business through innovative AI and technology solutions
           </motion.p>
         </div>
       </div>
 
-      {/* Why Join Us Section */}
+      {/* Collaboration Image Section */}
       <div className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <motion.div 
-            className="max-w-3xl mx-auto text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl font-bold mb-6 text-[#482A7A]">Why Join ALIF?</h2>
-            <p className="text-gray-600 mb-8">
-              At ALIF, we believe in nurturing talent and providing opportunities for growth. Our culture promotes innovation, collaboration, and continuous learning.
-            </p>
-          </motion.div>
+          <div className="max-w-4xl mx-auto">
+            <img
+              src={collabImage}
+              alt="Collaboration"
+              className="w-full h-64 object-cover rounded-lg shadow-lg"
+            />
+          </div>
         </div>
       </div>
 
-      {/* Career Opportunities Section */}
+      {/* Why Us Section */}
       <div className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-[#482A7A]">Career Opportunities</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {opportunities.map((opportunity, index) => (
-              <motion.div
-                key={index}
-                className="bg-white p-6 rounded-xl shadow-lg"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <div className="flex justify-center mb-4">{opportunity.icon}</div>
-                <h3 className="text-xl font-bold mb-4 text-center">{opportunity.title}</h3>
-                <ul className="space-y-2">
-                  {opportunity.positions.map((position, idx) => (
-                    <li key={idx} className="text-gray-600 text-center">{position}</li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#482A7A]">Why Choose ALIF?</h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {whyUsPoints.map((point, index) => (
+                <motion.div
+                  key={index}
+                  className="flex items-start p-4"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                >
+                  <div className="w-2 h-2 bg-[#B31F7E] rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                  <span className="text-gray-700">{point}</span>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Benefits Section */}
-      <div className="py-16 bg-[#B31F7E] text-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Benefits & Perks</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                className="flex items-center justify-center p-4 bg-white/10 rounded-lg backdrop-blur-sm"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-              >
-                <span className="text-lg font-semibold text-center">{benefit}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Application CTA */}
+      {/* How to Collaborate Section */}
       <div className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#482A7A]">How to Collaborate with Us</h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {collaborationSteps.map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-gray-50 p-6 rounded-lg"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                >
+                  <h3 className="text-xl font-bold mb-3 text-[#B31F7E]">{item.step}</h3>
+                  <p className="text-gray-700">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="py-16 bg-[#B31F7E] text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8 text-[#482A7A]">Ready to Join Us?</h2>
-          <p className="max-w-2xl mx-auto text-gray-600 mb-8">
-            We're always looking for talented individuals to join our team. Check out our current openings or send us your resume.
+          <h2 className="text-3xl font-bold mb-8">Ready to Start Your Transformation?</h2>
+          <p className="max-w-2xl mx-auto mb-8">
+            Get whitelisted and onboard with ALIF to begin your AI transformation journey today.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="bg-[#B31F7E] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#482A7A] transition-colors">
-              View Open Positions
+            <button className="bg-white text-[#B31F7E] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+              Apply for Whitelist
             </button>
-            <button className="border-2 border-[#B31F7E] text-[#B31F7E] px-8 py-3 rounded-lg font-semibold hover:bg-[#B31F7E] hover:text-white transition-colors">
-              Submit Your Resume
+            <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#B31F7E] transition-colors">
+              Schedule Consultation
             </button>
           </div>
         </div>
@@ -143,4 +138,4 @@ const Journey = () => {
   );
 };
 
-export default Journey; 
+export default Journey;

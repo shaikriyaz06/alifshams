@@ -61,11 +61,11 @@ const Footer = () => {
           <div>
             <h4 className="text-xl font-semibold mb-4">Our Services</h4>
             <ul className="space-y-2">
-              <li className="text-gray-300">Digital Transformation</li>
-              <li className="text-gray-300">Cloud Solutions</li>
-              <li className="text-gray-300">AI & Machine Learning</li>
-              <li className="text-gray-300">Cybersecurity</li>
-              <li className="text-gray-300">IoT Solutions</li>
+              <li className="text-gray-300">AI Consulting</li>
+              <li className="text-gray-300">Business and Technology Consulting</li>
+              <li className="text-gray-300">Digital Marketing</li>
+              {/* <li className="text-gray-300">Cybersecurity</li>
+              <li className="text-gray-300">IoT Solutions</li> */}
             </ul>
           </div>
 

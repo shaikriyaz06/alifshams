@@ -1,138 +1,135 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaUsers, FaLightbulb, FaHandshake, FaRocket } from 'react-icons/fa';
+import { FaBullseye, FaRocket, FaGlobe, FaShieldAlt, FaHandshake } from 'react-icons/fa';
+import heroImage from './assets/industries1.png';
+import aboutImage from './assets/software.avif';
 
 const About = () => {
-  const values = [
-    {
-      icon: <FaUsers className="text-4xl text-[#B31F7E]" />,
-      title: 'People First',
-      description: 'We believe in nurturing talent and fostering a culture of growth and innovation.',
-    },
-    {
-      icon: <FaLightbulb className="text-4xl text-[#B31F7E]" />,
-      title: 'Innovation',
-      description: 'Constantly pushing boundaries to deliver cutting-edge solutions.',
-    },
-    {
-      icon: <FaHandshake className="text-4xl text-[#B31F7E]" />,
-      title: 'Partnership',
-      description: 'Building lasting relationships with our clients through trust and collaboration.',
-    },
-    {
-      icon: <FaRocket className="text-4xl text-[#B31F7E]" />,
-      title: 'Excellence',
-      description: 'Committed to delivering the highest quality in everything we do.',
-    },
+  const whoWeArePoints = [
+    "Leading technology solutions provider",
+    "Dedicated to transforming businesses through innovation",
+    "Trusted partner for organizations worldwide",
+    "Expertise in AI consulting and business transformation",
+    "Helping companies embrace the future of technology",
+    "Committed to sustainable growth across industries"
   ];
 
-  const stats = [
-    { number: '10+', label: 'Years of Experience' },
-    { number: '200+', label: 'Projects Completed' },
-    { number: '50+', label: 'Expert Team Members' },
-    { number: '95%', label: 'Client Satisfaction' },
+  const coreValuesData = [
+    { icon: <FaBullseye />, title: "Business Outcome-First", description: "Business outcome-first thinking" },
+    { icon: <FaRocket />, title: "Agile Delivery", description: "Agile delivery models" },
+    { icon: <FaGlobe />, title: "Global Innovation", description: "Global innovation, local execution" },
+    { icon: <FaShieldAlt />, title: "Ethical AI", description: "Ethical frameworks for AI and tech" },
+    { icon: <FaHandshake />, title: "Partnership", description: "True transformation partnership" }
   ];
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="bg-white">
       {/* Hero Section */}
-      <div className="bg-[#1f1f1f] text-white py-20">
-        <div className="container mx-auto px-4">
-          <motion.h1 
-            className="text-4xl md:text-5xl font-bold text-center mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+      <section className="relative h-[800px] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={heroImage}
+            alt="About Us"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/60"></div>
+        </div>
+        <div className="relative z-10 text-center text-white px-4">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">
             About ALIF
-          </motion.h1>
-          <motion.p 
-            className="text-xl text-center max-w-3xl mx-auto text-gray-300"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            We are a leading technology solutions provider, dedicated to transforming businesses through innovative digital solutions.
-          </motion.p>
+          </h1>
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto">
+            Transforming businesses through innovative AI and technology solutions
+          </p>
         </div>
-      </div>
+      </section>
 
-      {/* Our Story Section */}
-      <div className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div 
-            className="max-w-3xl mx-auto text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl font-bold mb-6 text-[#482A7A]">Our Story</h2>
-            <p className="text-gray-600 mb-4">
-              Founded in 2013, ALIF began with a vision to bridge the gap between technology and business success. What started as a small team of passionate innovators has grown into a global technology solutions provider.
-            </p>
-            <p className="text-gray-600">
-              Today, we continue to push the boundaries of what's possible, helping businesses across various industries embrace digital transformation and achieve their full potential.
-            </p>
-          </motion.div>
+      {/* Who We Are Section */}
+      <section className="py-16 px-4">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-12 text-[#482A7A]">
+            Who We Are
+          </h2>
+          <div className="flex flex-col lg:flex-row gap-12">
+            {/* Points - Left Side */}
+            <div className="flex-1">
+              <ul className="space-y-4">
+                {whoWeArePoints.map((point, index) => (
+                  <li key={index} className="flex items-start">
+                    <div className="w-2 h-2 bg-[#B31F7E] rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                    <span className="text-lg text-gray-700">{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* Image - Right Side */}
+            <div className="flex-1">
+              <img
+                src={aboutImage}
+                alt="Who We Are"
+                className="w-full h-96 object-cover rounded-lg shadow-lg"
+              />
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* Values Section */}
-      <div className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-[#482A7A]">Our Values</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => (
+      {/* Our Core Values Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-6 text-[#482A7A]">
+            Our Core Values
+          </h2>
+          <p className="text-lg text-gray-700 mb-12">
+            We work as your transformation partner—not a vendor—by combining:
+          </p>
+          
+          {/* First Row - 3 Icons */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            {coreValuesData.slice(0, 3).map((value, index) => (
               <motion.div
                 key={index}
-                className="bg-white p-6 rounded-xl shadow-lg text-center"
+                className="bg-white p-6 rounded-lg shadow-lg text-center"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <div className="flex justify-center mb-4">{value.icon}</div>
-                <h3 className="text-xl font-bold mb-2">{value.title}</h3>
+                <div className="text-4xl text-[#B31F7E] mb-4 flex justify-center">
+                  {value.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-[#482A7A]">{value.title}</h3>
                 <p className="text-gray-600">{value.description}</p>
               </motion.div>
             ))}
           </div>
-        </div>
-      </div>
 
-      {/* Stats Section */}
-      <div className="py-16 bg-[#B31F7E] text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
+          {/* Second Row - 2 Icons */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto mb-8">
+            {coreValuesData.slice(3, 5).map((value, index) => (
               <motion.div
-                key={index}
-                className="text-center"
+                key={index + 3}
+                className="bg-white p-6 rounded-lg shadow-lg text-center"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: (index + 3) * 0.1 }}
               >
-                <div className="text-4xl font-bold mb-2">{stat.number}</div>
-                <div className="text-sm uppercase tracking-wider">{stat.label}</div>
+                <div className="text-4xl text-[#B31F7E] mb-4 flex justify-center">
+                  {value.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-[#482A7A]">{value.title}</h3>
+                <p className="text-gray-600">{value.description}</p>
               </motion.div>
             ))}
           </div>
-        </div>
-      </div>
 
-      {/* Team Section */}
-      <div className="py-16 bg-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-12 text-[#482A7A]">Our Leadership</h2>
-          <p className="max-w-2xl mx-auto text-gray-600 mb-8">
-            Our diverse team of experts brings together years of industry experience and technical expertise to deliver exceptional results for our clients.
+          <p className="text-lg text-gray-700">
+            This approach ensures we deliver not just technology solutions, but true business transformation that drives lasting value.
           </p>
-          <button className="bg-[#B31F7E] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#482A7A] transition-colors">
-            Meet Our Team
-          </button>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
 
-export default About; 
+export default About;

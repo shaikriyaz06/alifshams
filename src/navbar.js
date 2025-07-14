@@ -12,7 +12,7 @@ function Navbar() {
 
   const navItems = [
     { to: "/", label: "Home" },
-    { to: "/solutions", label: "Solutions", hasDropdown: true },
+    { to: "#", label: "Solutions", hasDropdown: true },
     { to: "/about", label: "About Us" },
     { to: "/journey", label: "Be a Part of Our Journey" },
     { to: "/contact", label: "Contact Us" },
@@ -20,80 +20,80 @@ function Navbar() {
 
   const solutionsDropdown = [
     {
-      to: "/solutions/web-development",
+      to: "/solutions/AIConsulting",
       label: "AI Consulting",
       submenu: [
         {
-          to: "/solutions/web-development/frontend",
+          to: "/solutions/AIConsulting/AIstrategy",
           label: "AI Strategy - Development & Implementation",
         },
         {
-          to: "/solutions/web-development/backend",
+          to: "/solutions/AIConsulting/customAI-development",
           label: "Custom AI Development",
         },
         {
-          to: "/solutions/web-development/fullstack",
+          to: "/solutions/AIConsulting/genAI-development",
           label: " Generative AI Development & Services",
         },
-        { to: "/solutions/web-development/frontend", label: "Agentic AI" },
+        { to: "/solutions/AIConsulting/agenticAI", label: "Agentic AI" },
         {
-          to: "/solutions/web-development/backend",
+          to: "/solutions/AIConsulting/ethicalAI-compliance",
           label: "Ethical AI and Compliance",
         },
         {
-          to: "/solutions/web-development/fullstack",
+          to: "/solutions/AIConsulting/AI-research",
           label: "AI Research & Training",
         },
       ],
     },
     {
-      to: "/solutions/mobile-apps",
+      to: "/solutions/business-technology",
       label: "Business and Technology Consulting",
       submenu: [
         {
-          to: "/solutions/mobile-apps/ios",
+          to: "/solutions/business-technology/microsoft",
           label: "Microsoft-related Services",
         },
         {
-          to: "/solutions/mobile-apps/android",
+          to: "/solutions/business-technology/website-design",
           label: "Website Design & Development",
         },
-        { to: "/solutions/mobile-apps/react-native", label: "Cloud Solutions" },
-        { to: "/solutions/mobile-apps/ios", label: "Cybersecurity" },
+        { to: "/solutions/business-technology/cloud-solutions", label: "Cloud Solutions" },
+        { to: "/solutions/business-technology/cybersecurity", label: "Cybersecurity" },
         {
-          to: "/solutions/mobile-apps/android",
+          to: "/solutions/business-technology/strategy-digitalTransformation",
           label: "Strategy & Digital Transformation",
         },
         {
-          to: "/solutions/mobile-apps/react-native",
+          to: "/solutions/business-technology/risk-compliance",
           label: "Governance, Risk & Compliance",
         },
       ],
     },
     {
-      to: "/solutions/cloud-services",
+      to: "/solutions/digital-marketing",
       label: "Digital Marketing",
       submenu: [
         {
-          to: "/solutions/cloud-services/aws",
+          to: "/solutions/digital-marketing/demand-generation",
           label: "Demand Generation & Sales Pipelines",
         },
-        { to: "/solutions/cloud-services/azure", label: "SEO" },
+        { to: "/solutions/digital-marketing/seo", label: "SEO" },
         {
-          to: "/solutions/cloud-services/migration",
+          to: "/solutions/digital-marketing/smm",
           label: "Social Media Marketing (SMM)",
         },
         {
-          to: "/solutions/cloud-services/aws",
+          to: "/solutions/digital-marketing/content-marketing",
           label: "Email & Content Marketing",
         },
-        { to: "/solutions/cloud-services/azure", label: "Video Marketing" },
+        { to: "/solutions/digital-marketing/video-marketing", label: "Video Marketing" },
         {
-          to: "/solutions/cloud-services/migration",
+          to: "/solutions/digital-marketing/influencer-marketing",
           label: "Influencer Marketing",
         },
       ],
-    }
+    },
   ];
 
   const isActive = (path) => location.pathname === path;

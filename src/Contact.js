@@ -1,203 +1,521 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
+import {
+  Box,
+  Typography,
+  Grid,
+  Card,
+  Button,
+  Container,
+  TextField,
+  InputAdornment,
+  Paper,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel
+} from '@mui/material';
+import {
+  Email,
+  LocationOn,
+  Send,
+  Phone,
+  Business,
+  CloudUpload
+} from '@mui/icons-material';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import contactImage from './assets/industries1.png';
 
-const Contact = () => {
+const ContactUs = () => {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
+    userType: '',
     name: '',
     email: '',
     phone: '',
-    subject: '',
+    countryCode: '',
+    companyName: '',
+    serviceOfInterest: '',
     message: '',
+    yearsOfExperience: '',
+    keySkills: '',
+    education: '',
+    availability: '',
+    linkedinProfile: '',
+    portfolio: '',
+    coverLetter: '',
+    resume: null
   });
 
-  const handleChange = (e) => {
+  const services = [
+    'IT Consulting & Solutions',
+    'Business Consulting',
+    'Tailored Talent Solutions'
+  ];
+
+  const availabilityOptions = [
+    'Immediately',
+    '15-30 days',
+    '30-60 days',
+    'More than 60 days'
+  ];
+
+  const handleInputChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
+  const handleFileChange = (e) => {
+    setFormData({
+      ...formData,
+      resume: e.target.files[0]
+    });
   };
 
-  const contactInfo = [
-    {
-      icon: <FaPhone className="text-2xl text-[#B31F7E]" />,
-      title: 'Phone',
-      details: ['+1 (555) 123-4567', '+1 (555) 987-6543'],
-    },
-    {
-      icon: <FaEnvelope className="text-2xl text-[#B31F7E]" />,
-      title: 'Email',
-      details: ['info@alif.com', 'support@alif.com'],
-    },
-    {
-      icon: <FaMapMarkerAlt className="text-2xl text-[#B31F7E]" />,
-      title: 'Location',
-      details: ['123 Tech Street', 'Silicon Valley, CA 94025'],
-    },
-    {
-      icon: <FaClock className="text-2xl text-[#B31F7E]" />,
-      title: 'Business Hours',
-      details: ['Mon - Fri: 9:00 AM - 6:00 PM', 'Sat - Sun: Closed'],
-    },
-  ];
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      let response;
+      const isClient = formData.userType === 'client';
+
+      if (isClient) {
+        response = await axios.post("/user/mail", formData);
+      } else {
+        const formDataToSend = new FormData();
+        Object.keys(formData).forEach((key) => {
+          if (key === 'resume' && formData[key]) {
+            formDataToSend.append('resume', formData[key]);
+          } else {
+            formDataToSend.append(key, formData[key] || '');
+          }
+        });
+        response = await axios.post("/user/contactus", formDataToSend, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        });
+      }
+
+      toast.success("Form submitted successfully!", { autoClose: 3000 });
+      setFormData({
+        userType: '',
+        name: '',
+        email: '',
+        phone: '',
+        countryCode: '',
+        companyName: '',
+        serviceOfInterest: '',
+        message: '',
+        yearsOfExperience: '',
+        keySkills: '',
+        education: '',
+        availability: '',
+        linkedinProfile: '',
+        portfolio: '',
+        coverLetter: '',
+        resume: null
+      });
+    } catch (error) {
+      toast.error("Error submitting form", { autoClose: 3000 });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const renderClientFields = () => (
+    <>
+      <Grid item xs={12} md={6}>
+        <TextField
+          fullWidth
+          label="Company Name"
+          name="companyName"
+          value={formData.companyName}
+          onChange={handleInputChange}
+          required
+          variant="outlined"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Business />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FormControl fullWidth required>
+          <InputLabel>Service of Interest</InputLabel>
+          <Select
+            name="serviceOfInterest"
+            value={formData.serviceOfInterest}
+            onChange={handleInputChange}
+            label="Service of Interest"
+          >
+            {services.map((service) => (
+              <MenuItem key={service} value={service}>
+                {service}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
+    </>
+  );
+
+  const renderJobSeekerFields = () => (
+    <>
+      <Grid item xs={12} md={6}>
+        <TextField
+          fullWidth
+          label="Years of Experience"
+          name="yearsOfExperience"
+          value={formData.yearsOfExperience}
+          onChange={handleInputChange}
+          required
+          variant="outlined"
+        />
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <TextField
+          fullWidth
+          label="Education"
+          name="education"
+          value={formData.education}
+          onChange={handleInputChange}
+          required
+          variant="outlined"
+        />
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <FormControl fullWidth required>
+          <InputLabel>Availability</InputLabel>
+          <Select
+            name="availability"
+            value={formData.availability}
+            onChange={handleInputChange}
+            label="Availability"
+          >
+            {availabilityOptions.map((option) => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <TextField
+          fullWidth
+          label="LinkedIn Profile"
+          name="linkedinProfile"
+          value={formData.linkedinProfile}
+          onChange={handleInputChange}
+          variant="outlined"
+        />
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <TextField
+          fullWidth
+          label="Portfolio/Website"
+          name="portfolio"
+          value={formData.portfolio}
+          onChange={handleInputChange}
+          variant="outlined"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          fullWidth
+          label="Key Skills (Comma-separated)"
+          name="keySkills"
+          value={formData.keySkills}
+          onChange={handleInputChange}
+          required
+          multiline
+          rows={3}
+          variant="outlined"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          fullWidth
+          label="Cover Letter"
+          name="coverLetter"
+          value={formData.coverLetter}
+          onChange={handleInputChange}
+          multiline
+          rows={4}
+          variant="outlined"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Button
+          variant="outlined"
+          component="label"
+          startIcon={<CloudUpload />}
+          sx={{ mb: 1 }}
+        >
+          Upload Resume *
+          <input
+            type="file"
+            hidden
+            accept=".pdf,.doc,.docx"
+            onChange={handleFileChange}
+            required
+          />
+        </Button>
+        {formData.resume && (
+          <Typography variant="body2" sx={{ mt: 1 }}>
+            Selected: {formData.resume.name}
+          </Typography>
+        )}
+      </Grid>
+    </>
+  );
 
   return (
-    <div className="min-h-screen pt-20">
+    <Box sx={{ minHeight: '100vh', bgcolor: 'black' }}>
       {/* Hero Section */}
-      <div className="bg-[#1f1f1f] text-white py-20">
-        <div className="container mx-auto px-4">
-          <motion.h1 
-            className="text-4xl md:text-5xl font-bold text-center mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+      <Box
+        sx={{
+          position: 'relative',
+          height: '400px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden'
+        }}
+      >
+        <Box
+          component="img"
+          src={contactImage}
+          alt="Contact Us"
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            opacity: 0.5,
+            zIndex: -2
+          }}
+        />
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            bgcolor: 'rgba(0,0,0,0.5)',
+            zIndex: -1
+          }}
+        />
+        <Container maxWidth="lg" sx={{ textAlign: 'center', color: 'white', zIndex: 1 }}>
+          <Typography variant="h2" component="h1" sx={{ fontWeight: 'bold', mb: 3, pt: 14 }}>
             Contact Us
-          </motion.h1>
-          <motion.p 
-            className="text-xl text-center max-w-3xl mx-auto text-gray-300"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Get in touch with us. We're here to help and answer any questions you might have.
-          </motion.p>
-        </div>
-      </div>
+          </Typography>
+          <Typography variant="h6" sx={{ maxWidth: '800px', mx: 'auto' }}>
+            We're here to provide innovative AI solutions tailored to your needs. 
+            Get in touch with us to discuss how we can bring your vision to life with precision and excellence.
+          </Typography>
+        </Container>
+      </Box>
 
-      {/* Contact Information Grid */}
-      <div className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            {contactInfo.map((info, index) => (
-              <motion.div
-                key={index}
-                className="p-6 bg-gray-50 rounded-xl text-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <div className="flex justify-center mb-4">{info.icon}</div>
-                <h3 className="text-xl font-bold mb-4">{info.title}</h3>
-                {info.details.map((detail, idx) => (
-                  <p key={idx} className="text-gray-600">{detail}</p>
-                ))}
-              </motion.div>
-            ))}
-          </div>
+      {/* Contact Section */}
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Grid container spacing={6}>
+          {/* Contact Information */}
+          <Grid item xs={12} lg={4}>
+            <Box sx={{ mb: 4 }}>
+              <Typography variant="h4" sx={{ color: 'white', mb: 2 }}>
+                Get in Touch
+              </Typography>
+              <Typography variant="body1" sx={{ color: 'grey.300' }}>
+                We're here to help and answer any question you might have. We look forward to hearing from you.
+              </Typography>
+            </Box>
+
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+              <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                <Email sx={{ color: 'white', fontSize: 24, mt: 0.5, mr: 2 }} />
+                <Box>
+                  <Typography variant="h6" sx={{ color: 'white', fontWeight: 'bold' }}>
+                    Email
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: 'grey.300' }}>
+                    contact@alifshams.com
+                  </Typography>
+                </Box>
+              </Box>
+
+              <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                <LocationOn sx={{ color: 'white', fontSize: 24, mt: 0.5, mr: 2 }} />
+                <Box>
+                  <Typography variant="h6" sx={{ color: 'white', fontWeight: 'bold' }}>
+                    Headquarters
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: 'grey.300' }}>
+                    Innovation Hub, Tech City, Hyderabad, Telangana - 500001
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+          </Grid>
 
           {/* Contact Form */}
-          <div className="max-w-3xl mx-auto">
-            <motion.div
-              className="bg-white p-8 rounded-xl shadow-lg"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <h2 className="text-3xl font-bold mb-8 text-center text-[#482A7A]">Send Us a Message</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-gray-700 mb-2" htmlFor="name">
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
+          <Grid item xs={12} lg={8}>
+            <Card sx={{ p: 4, bgcolor: 'grey.100' }}>
+              <Typography variant="h4" sx={{ mb: 3, fontWeight: 'bold' }}>
+                Send Us a Message
+              </Typography>
+              <form onSubmit={handleSubmit}>
+                <Grid container spacing={3}>
+                  <Grid item xs={12}>
+                    <FormControl fullWidth required>
+                      <InputLabel>I am a</InputLabel>
+                      <Select
+                        name="userType"
+                        value={formData.userType}
+                        onChange={handleInputChange}
+                        label="I am a"
+                      >
+                        <MenuItem value="client">Client</MenuItem>
+                        <MenuItem value="jobSeeker">Job Seeker</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item xs={12} md={6}>
+                    <TextField
+                      fullWidth
+                      label="Full Name"
                       name="name"
                       value={formData.name}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B31F7E]"
+                      onChange={handleInputChange}
                       required
+                      variant="outlined"
                     />
-                  </div>
-                  <div>
-                    <label className="block text-gray-700 mb-2" htmlFor="email">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
+                  </Grid>
+
+                  <Grid item xs={12} md={6}>
+                    <TextField
+                      fullWidth
+                      label="Email"
                       name="email"
+                      type="email"
                       value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B31F7E]"
+                      onChange={handleInputChange}
                       required
+                      variant="outlined"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <Email />
+                          </InputAdornment>
+                        ),
+                      }}
                     />
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-gray-700 mb-2" htmlFor="phone">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
+                  </Grid>
+
+                  <Grid item xs={12} md={4}>
+                    <TextField
+                      fullWidth
+                      label="Country Code"
+                      name="countryCode"
+                      value={formData.countryCode}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="+966"
+                      variant="outlined"
+                    />
+                  </Grid>
+
+                  <Grid item xs={12} md={8}>
+                    <TextField
+                      fullWidth
+                      label="Phone Number"
                       name="phone"
                       value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B31F7E]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-gray-700 mb-2" htmlFor="subject">
-                      Subject
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B31F7E]"
+                      onChange={handleInputChange}
                       required
+                      variant="outlined"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <Phone />
+                          </InputAdornment>
+                        ),
+                      }}
                     />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-gray-700 mb-2" htmlFor="message">
-                    Your Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows="6"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#B31F7E]"
-                    required
-                  ></textarea>
-                </div>
-                <div className="text-center">
-                  <button
-                    type="submit"
-                    className="bg-[#B31F7E] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#482A7A] transition-colors"
-                  >
-                    Send Message
-                  </button>
-                </div>
-              </form>
-            </motion.div>
-          </div>
-        </div>
-      </div>
+                  </Grid>
 
-      {/* Map Section */}
-      <div className="h-96 bg-gray-200">
-        {/* Add your map component here */}
-        <div className="w-full h-full flex items-center justify-center text-gray-500">
-          Map Component Placeholder
-        </div>
-      </div>
-    </div>
+                  {formData.userType === 'client' && renderClientFields()}
+                  {formData.userType === 'jobSeeker' && renderJobSeekerFields()}
+
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      required
+                      multiline
+                      rows={6}
+                      variant="outlined"
+                    />
+                  </Grid>
+                  
+                  <Grid item xs={12}>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      size="large"
+                      disabled={loading}
+                      startIcon={<Send />}
+                      sx={{
+                        bgcolor: '#B31F7E',
+                        '&:hover': { bgcolor: '#482A7A' },
+                        px: 4,
+                        py: 1.5,
+                        fontWeight: 'bold'
+                      }}
+                    >
+                      {loading ? 'Sending...' : 'Send Message'}
+                    </Button>
+                  </Grid>
+                </Grid>
+              </form>
+            </Card>
+          </Grid>
+        </Grid>
+      </Container>
+
+      {/* Google Map Section */}
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Typography variant="h4" sx={{ textAlign: 'center', mb: 6, color: 'white' }}>
+          Find Us
+        </Typography>
+        <Paper sx={{ height: '400px', borderRadius: 2, overflow: 'hidden' }}>
+          <iframe
+            title="Google Map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.8368324924766!2d78.4411097!3d17.4004712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb971466381c91%3A0xc855906f2903c236!2sMasab%20Tank%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1702599999999!5m2!1sen!2sin"
+            style={{
+              width: '100%',
+              height: '100%',
+              border: 0
+            }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </Paper>
+      </Container>
+    </Box>
   );
 };
 
-export default Contact; 
+export default ContactUs;

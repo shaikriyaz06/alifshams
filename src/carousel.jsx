@@ -3,7 +3,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useAnimation, useTransform } from "framer-motion";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
-import industriesImage from "../src/assets/industries1.png";
+import backgroundImage1 from "../src/assets/industries1.png";
 const carouselData = [
   {
     id: "Discover",
@@ -95,9 +95,17 @@ export default function CarouselSliderTailwind() {
   const rightX = useTransform(scrollYProgress, [0, 1], ["-50px", "70px"]);
   // const translateY = useTransform(newsScrollProgress, [0, 0], ["0%", "0%"]);
   return (
-    <section className="w-full py-10 bg-white" ref={sectionRef}  style={{
-                  backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${industriesImage})`,
-                }}>
+    <section
+      className="w-full py-10 bg-white"
+      ref={sectionRef}
+      style={{
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${backgroundImage1})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'repeat',
+        backgroundAttachment: 'fixed'
+      }}
+    >
       <div className="max-w-6xl mx-auto h-auto px-4">
         <h2 className="text-4xl font-bold mb-2 text-center text-[#B31F7E]">
           The ALIF Approach - 4D2E

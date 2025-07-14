@@ -16,6 +16,7 @@ import { styled } from "@mui/material/styles";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import industriesImage from "../src/assets/industries1.png";
+import backgroundImage1 from "../src/assets/background2.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   EffectCoverflow,
@@ -24,6 +25,7 @@ import {
   Pagination,
 } from "swiper/modules";
 import Carouselcomponent from "./carousel";
+import { Link } from "react-router-dom";
 const engagementPhases = [
   { title: "1. Discover", description: "Assess needs, baseline KPIs" },
   { title: "2. Design", description: "Co-create blueprints & use cases" },
@@ -150,6 +152,7 @@ export default function Home() {
   const cards = [
     {
       title: "🤖 AI Consulting",
+      link: "/solutions/AIConsulting",
       points: [
         "AI Strategy - Development & Implementation",
         "Custom AI Development",
@@ -163,6 +166,7 @@ export default function Home() {
     },
     {
       title: "📊 Business & Technology Consulting",
+      link: "/solutions/business-technology",
       points: [
         "Microsoft-related Services",
         "Website Design & Development",
@@ -176,6 +180,7 @@ export default function Home() {
     },
     {
       title: "📈 Digital Marketing",
+      link: "/solutions/digital-marketing",
       points: [
         "Demand Generation & Sales Pipelines",
         "SEO",
@@ -207,7 +212,16 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white">
+    <div
+      className="min-h-screen"
+      style={{
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${backgroundImage1})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "repeat",
+        backgroundAttachment: "fixed",
+      }}
+    >
       {/* Hero Section */}
       <div className="relative w-full h-[calc(100vh-73px)] mt-[73px]">
         <div className="absolute inset-0">
@@ -238,13 +252,16 @@ export default function Home() {
         <div>
           <Carouselcomponent />
         </div>
-        <hr className="border border-gray-500" />
+
         <div className="relative">
           <section
             className="z-10 px-10 pb-10"
             ref={newsRef}
             style={{
-              backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${industriesImage})`,
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${backgroundImage1})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "repeat",
             }}
           >
             <div className="container mx-auto px-4 pb-10 ">
@@ -287,19 +304,24 @@ export default function Home() {
                         <li key={i}>{point}</li>
                       ))}
                     </ul>
-                    <button className="mt-4 text-sm bg-white text-[#B31F7E] font-bold px-4 py-2 rounded hover:bg-purple-100 transition-all">
-                      Know More →
-                    </button>
+                    <Link to={card.link}>
+                      <button className="mt-4 text-sm bg-white text-[#B31F7E] font-bold px-4 py-2 rounded hover:bg-purple-100 transition-all">
+                        Know More →
+                      </button>
+                    </Link>
                   </div>
                 </SwiperSlide>
               ))}
             </Swiper>
           </section>
-          <hr className="border border-gray-500" />
+
           <motion.section
-            className="py-10 px-20 text-white w-full z-20 relative bg-cover bg-center bg-no-repeat"
+            className="py-10 px-20 text-white w-full z-20 relative"
             style={{
-              backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${industriesImage})`,
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${backgroundImage1})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "repeat",
             }}
           >
             <h2 className="text-4xl font-bold text-center mb-4 text-[#B31F7E]">
@@ -359,7 +381,15 @@ export default function Home() {
         </div>
 
         {/* Why Join Us Section */}
-        <section className="py-16 bg-black">
+        <section
+          className="py-16"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${backgroundImage1})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "repeat",
+          }}
+        >
           <div className="container mx-auto px-4">
             <h2 className="text-4xl font-bold text-center mb-4 text-[#B31F7E]">
               Why Alif Shams?
@@ -465,10 +495,13 @@ export default function Home() {
           </div>
         </section> */}
         <section
-          className="py-16 bg-black"
-          // style={{
-          //   backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${industriesImage})`,
-          // }}
+          className="py-16"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${backgroundImage1})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "repeat",
+          }}
         >
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-4xl font-bold mb-4 text-white">
