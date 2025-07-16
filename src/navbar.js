@@ -94,6 +94,16 @@ function Navbar() {
         },
       ],
     },
+    {
+      to: "/solutions/caseStudies",
+      label: "Case Studies",
+      submenu: [
+        {
+          to: "/solutions/AIConsulting/AIstrategy",
+          label: "Development Case Studies",
+        }
+      ],
+    },
   ];
 
   const isActive = (path) => location.pathname === path;

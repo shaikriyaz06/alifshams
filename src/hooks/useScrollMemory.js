@@ -7,37 +7,10 @@ export const useScrollMemory = () => {
   const isNavigating = useRef(false);
 
   useEffect(() => {
-    const currentPath = location.pathname;
-    const savedPosition = scrollPositions.current.get(currentPath);
+    // Always scroll to top for all routes
+    window.scrollTo(0, 0);
 
-    if (savedPosition !== undefined) {
-      // Restore scroll position for visited routes
-      setTimeout(() => {
-        window.scrollTo(0, savedPosition);
-      }, 0);
-    } else {
-      // Scroll to top for new routes
-      window.scrollTo(0, 0);
-    }
 
-    // Save scroll position when leaving the page
-    const handleBeforeUnload = () => {
-      scrollPositions.current.set(currentPath, window.scrollY);
-    };
-
-    const handleScroll = () => {
-      if (!isNavigating.current) {
-        scrollPositions.current.set(currentPath, window.scrollY);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('beforeunload', handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
   }, [location.pathname]);
 
   // Mark navigation start

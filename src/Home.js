@@ -7,16 +7,20 @@ import "@glidejs/glide/dist/css/glide.core.min.css";
 import "@glidejs/glide/dist/css/glide.theme.min.css";
 import Masonry from "@mui/lab/Masonry";
 import Paper from "@mui/material/Paper";
-import telcomImage from "../src/assets/telcom.avif";
-import healthcare from "../src/assets/healthcare.avif";
+import telcomImage from "../src/assets/telcom.jpg";
+import proptechImage from "../src/assets/Prop-tech.jpg";
+// import healthcare from "../src/assets/healthcare.avif";
 import banking from "../src/assets/banking1.avif";
 import software from "../src/assets/software.avif";
 import education from "../src/assets/education.avif";
 import { styled } from "@mui/material/styles";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
-import industriesImage from "../src/assets/industries1.png";
-import backgroundImage1 from "../src/assets/background2.jpg";
+import industriesImage from "../src/assets/background4.jpg";
+import backgroundImage4 from "../src/assets/background2.jpg";
+import backgroundImage1 from "../src/assets/background4.jpg";
+import domainsImage from "../src/assets/Domains.jpg";
+import healthCare from "../src/assets/healthCare.webp";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   EffectCoverflow,
@@ -102,7 +106,7 @@ export default function Home() {
     {
       title: "Healthcare",
       icon: "🏥",
-      img: healthcare,
+      img: healthCare,
       description:
         "Support health systems, hospitals, and startups with AI-driven diagnostics, virtual health platforms, operational analytics, and secure data governance models.",
       to: "/healthcare",
@@ -135,8 +139,17 @@ export default function Home() {
       to: "/education",
       color: "yellow",
     },
+    {
+      title: "PropTech",
+      icon: "🏢",
+      img: proptechImage, // make sure you have an appropriate image imported as `proptechImage`
+      description:
+        "Leverage AI for property valuation, smart tenant analytics, predictive maintenance, digital leasing, and real-time market intelligence to transform real estate operations.",
+      to: "/proptech",
+      color: "emerald", // or choose another Tailwind color like teal, indigo, etc.
+    },
   ];
-  const heights = [250, 300, 620, 350, 300];
+  const heights = [250, 300, 250, 350, 300, 350];
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: "transparent", // <- you may have missed this
@@ -243,9 +256,11 @@ export default function Home() {
           <p className="mx-auto max-w-3xl text-lg text-white md:text-xl lg:text-2xl">
             Transforming ideas into reality through innovation and excellence
           </p>
-          <button className="mt-8 px-8 py-3 bg-[#B31F7E] text-white font-medium rounded-xl hover:bg-[#482A7A] transition-colors">
-            Discover More
-          </button>
+          <Link to="/solutions/AIConsulting/AIstrategy">
+            <button className="mt-8 px-8 py-3 bg-[#B31F7E] text-white font-medium rounded-xl hover:bg-[#482A7A] transition-colors">
+              Discover More
+            </button>
+          </Link>
         </div>
       </div>
       <div>
@@ -258,17 +273,17 @@ export default function Home() {
             className="z-10 px-10 pb-10"
             ref={newsRef}
             style={{
-              backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${backgroundImage1})`,
+              // backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${domainsImage})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "repeat",
             }}
           >
-            <div className="container mx-auto px-4 pb-10 ">
+            <div className="container mx-auto px-4 py-10 ">
               <h2 className="text-4xl text-[#B31F7E] font-bold text-center mb-4">
                 Our Domains
               </h2>
-              <div className="w-24 h-1 bg-black mx-auto"></div>
+              <div className="w-24 h-1 bg-white mx-auto"></div>
             </div>
             <Swiper
               effect="coverflow"
@@ -291,158 +306,172 @@ export default function Home() {
               }}
               modules={[EffectCoverflow, Autoplay, Navigation]}
             >
-              {[...cards, ...cards].map((card, index) => (
-                <SwiperSlide key={index}>
-                  <div className="bg-purple-600  text-white rounded-xl shadow-lg h-96 p-10 flex flex-col items-start justify-center text-left border border-gray-300 ">
-                    <h3 className="text-xl font-bold mb-3">{card.title}</h3>
-                    <p className="text-sm font-semibold justify-center">
-                      {card.content}
-                    </p>
-                    <br />
-                    <ul className="list-disc ml-5 space-y-2 text-sm">
-                      {card.points.map((point, i) => (
-                        <li key={i}>{point}</li>
-                      ))}
-                    </ul>
-                    <Link to={card.link}>
-                      <button className="mt-4 text-sm bg-white text-[#B31F7E] font-bold px-4 py-2 rounded hover:bg-purple-100 transition-all">
-                        Know More →
-                      </button>
-                    </Link>
-                  </div>
-                </SwiperSlide>
-              ))}
+              {[...cards, ...cards].map((card, index) => {
+                const gradients = [
+                  "bg-gradient-to-br from-[#B31F7E] to-[#482A7A]",
+                  "bg-gradient-to-br from-[#3B82F6] to-[#1E40AF]",
+                  "bg-gradient-to-br from-[#10B981] to-[#047857]",
+                ];
+                return (
+                  <SwiperSlide key={index}>
+                    <div
+                      className={`${
+                        gradients[index % 3]
+                      } text-white rounded-xl shadow-lg h-[400px] p-5 flex flex-col items-start justify-center text-left border border-gray-300`}
+                    >
+                      <h3 className="text-xl font-bold mb-3 uppercase">
+                        {card.title}
+                      </h3>
+                      <p className="text-sm justify-center">{card.content}</p>
+                      <br />
+                      <ul className="list-disc ml-5 space-y-2 text-sm">
+                        {card.points.map((point, i) => (
+                          <li key={i}>{point}</li>
+                        ))}
+                      </ul>
+                      <Link to={card.link}>
+                        <button className="mt-4 text-sm bg-white text-[#B31F7E] font-bold px-4 py-2 rounded hover:bg-purple-100 transition-all">
+                          Know More →
+                        </button>
+                      </Link>
+                    </div>
+                  </SwiperSlide>
+                );
+              })}
             </Swiper>
           </section>
-
-          <motion.section
-            className="py-10 px-20 text-white w-full z-20 relative"
+          <div
             style={{
-              backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${backgroundImage1})`,
+              // backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${backgroundImage1})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "repeat",
             }}
           >
-            <h2 className="text-4xl font-bold text-center mb-4 text-[#B31F7E]">
-              Industries
-            </h2>
-            <div className="w-24 h-1 bg-black mx-auto"></div>
-            <Masonry
-              columns={3}
-              spacing={2}
-              defaultHeight={450}
-              defaultColumns={3}
-              defaultSpacing={1}
-              sequential
-              className="py-2"
-            >
-              {industries.map((item, index) => (
-                <Item
-                  key={index}
-                  sx={{
-                    height: heights[index % heights.length],
-                    boxShadow: "none",
-                  }}
-                >
-                  <div className="relative h-full w-full overflow-hidden cursor-pointer rounded-xl group flip-card">
-                    <div className="flip-inner w-full h-full">
-                      {/* Front */}
-                      <div className="flip-front w-full h-full">
-                        <img
-                          src={item.img}
-                          alt={item.title}
-                          loading="lazy"
-                          className="w-full h-full object-cover rounded-xl"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-80 z-10" />
-                        <div className="absolute bottom-2 left-3 text-white font-semibold text-xl z-20 text-center">
-                          {item.title}
+            <motion.section className="py-10 px-20 text-white w-full z-20 relative">
+              <h2 className="text-4xl font-bold text-center mb-4 text-[#B31F7E]">
+                Industries
+              </h2>
+              <div className="w-24 h-1 bg-white mx-auto"></div>
+              <Masonry
+                columns={3}
+                spacing={2}
+                defaultHeight={450}
+                defaultColumns={3}
+                defaultSpacing={1}
+                sequential
+                className="py-2"
+              >
+                {industries.map((item, index) => (
+                  <Item
+                    key={index}
+                    sx={{
+                      height: heights[index % heights.length],
+                      boxShadow: "none",
+                    }}
+                  >
+                    <div className="relative h-full w-full overflow-hidden cursor-pointer rounded-xl group flip-card">
+                      <div className="flip-inner w-full h-full">
+                        {/* Front */}
+                        <div className="flip-front w-full h-full">
+                          <img
+                            src={item.img}
+                            alt={item.title}
+                            loading="lazy"
+                            className="w-full h-full object-cover rounded-xl"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-80 z-10" />
+                          <div className="absolute bottom-2 left-3 text-white font-semibold text-xl z-20 text-center">
+                            {item.title}
+                          </div>
                         </div>
-                      </div>
 
-                      {/* Back */}
-                      <div className="flip-back w-full h-full rotate-y-180 absolute top-0 left-0 flex flex-col items-center text-white text-sm px-4 py-6">
-                        <h3 className="text-lg font-bold mb-4 text-white border-b-2 border-white">
-                          {item.title}
-                        </h3>
-                        <div className="flex-1 flex items-start justify-center">
-                          <p className="text-center mb-1white">
-                            {item.description}
-                          </p>
+                        {/* Back */}
+                        <div
+                          className={`flip-back flip-back-${index} w-full h-full rotate-y-180 absolute top-0 left-0 flex flex-col items-center text-white text-sm px-4 py-6`}
+                        >
+                          <h3 className="text-lg font-bold mb-4 text-white border-b-2 border-white">
+                            {item.title}
+                          </h3>
+                          <div className="flex-1 flex items-start justify-center">
+                            <p className="text-center mb-1 text-white">
+                              {item.description}
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </Item>
-              ))}
-            </Masonry>
-          </motion.section>
+                  </Item>
+                ))}
+              </Masonry>
+            </motion.section>
+          </div>
         </div>
 
         {/* Why Join Us Section */}
-        <section
-          className="py-16"
+        <div
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${backgroundImage1})`,
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${backgroundImage4})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "repeat",
           }}
         >
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center mb-4 text-[#B31F7E]">
-              Why Alif Shams?
-            </h2>
-            <div className="w-24 h-1 bg-white mx-auto mb-12"></div>
+          <section className="py-16">
+            <div className="container mx-auto px-4">
+              <h2 className="text-4xl font-bold text-center mb-4 text-[#B31F7E]">
+                Why Alif Shams?
+              </h2>
+              <div className="w-24 h-1 bg-white mx-auto mb-12"></div>
 
-            <div className="relative flex flex-col md:flex-row items-center justify-center gap-12 max-w-6xl mx-auto">
-              {/* Benefits & Perks */}
-              <div className="text-white text-left flex-1">
-                {/* <div className="text-4xl mb-4">💰</div> */}
-                <h3 className="text-2xl font-semibold mb-4 text-[#B31F7E]">
-                  Benefits & Perks
-                </h3>
-                <ul className="text-gray-300 space-y-3 text-left inline-block">
-                  <li>
-                    • Market-aligned compensation with performance rewards
-                  </li>
-                  <li>• Remote/hybrid flexibility</li>
-                  <li>• Annual learning budgets (AI, Cloud, DevSecOps)</li>
-                  <li>• Mental health & wellness support</li>
-                </ul>
-              </div>
+              <div className="relative flex flex-col md:flex-row items-center justify-center gap-12 max-w-6xl mx-auto">
+                {/* Benefits & Perks */}
+                <div className="text-white text-left flex-1">
+                  {/* <div className="text-4xl mb-4">💰</div> */}
+                  <h3 className="text-2xl font-semibold mb-4 text-[#B31F7E]">
+                    Benefits & Perks
+                  </h3>
+                  <ul className="text-gray-300 space-y-3 text-left inline-block">
+                    <li>
+                      • Market-aligned compensation with performance rewards
+                    </li>
+                    <li>• Remote/hybrid flexibility</li>
+                    <li>• Annual learning budgets (AI, Cloud, DevSecOps)</li>
+                    <li>• Mental health & wellness support</li>
+                  </ul>
+                </div>
 
-              {/* Vertical Line */}
-              <div className="hidden md:block w-px h-64 bg-white"></div>
+                {/* Vertical Line */}
+                <div className="hidden md:block w-px h-64 bg-white"></div>
 
-              {/* Career Opportunities */}
-              <div className="text-white text-left flex-1">
-                {/* <div className="text-4xl mb-4">🚀</div> */}
-                <h3 className="text-2xl font-semibold mb-4 text-[#B31F7E]">
-                  Career Opportunities
-                </h3>
-                <ul className="text-gray-300 space-y-3 text-left inline-block">
-                  <li>
-                    • Work on breakthrough GenAI and enterprise AI projects
-                  </li>
-                  <li>
-                    • Opportunity to lead transformation mandates across sectors
-                  </li>
-                  <li>
-                    • Accelerated growth from contributor to practice leader
-                  </li>
-                  <li>
-                    • Open roles in consulting, engineering, marketing, and
-                    product strategy
-                  </li>
-                </ul>
+                {/* Career Opportunities */}
+                <div className="text-white text-left flex-1">
+                  {/* <div className="text-4xl mb-4">🚀</div> */}
+                  <h3 className="text-2xl font-semibold mb-4 text-[#B31F7E]">
+                    Career Opportunities
+                  </h3>
+                  <ul className="text-gray-300 space-y-3 text-left inline-block">
+                    <li>
+                      • Work on breakthrough GenAI and enterprise AI projects
+                    </li>
+                    <li>
+                      • Opportunity to lead transformation mandates across
+                      sectors
+                    </li>
+                    <li>
+                      • Accelerated growth from contributor to practice leader
+                    </li>
+                    <li>
+                      • Open roles in consulting, engineering, marketing, and
+                      product strategy
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* <section className="py-16 bg-gradient-to-r from-[#482A7A] to-[#B31F7E]">
+          {/* <section className="py-16 bg-gradient-to-r from-[#482A7A] to-[#B31F7E]">
           <div className="container mx-auto px-4">
             <h2 className="text-4xl font-bold text-center mb-4 text-white">
               Get In Touch
@@ -494,34 +523,35 @@ export default function Home() {
             </div>
           </div>
         </section> */}
-        <section
-          className="py-16"
-          style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${backgroundImage1})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "repeat",
-          }}
-        >
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-4xl font-bold mb-4 text-white">
-              Ready to Transform Your Business?
-            </h2>
-            <div className="w-24 h-1 bg-white mx-auto mb-8"></div>
-            <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
-              Join thousands of companies who trust ALIF to drive their digital
-              transformation and achieve exceptional results.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 bg-white text-[#B31F7E] font-semibold rounded-xl hover:bg-gray-100 transition-colors">
-                Get Started Today
-              </button>
-              <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-[#B31F7E] transition-colors">
-                Schedule a Consultation
-              </button>
+          <section
+            className="py-16"
+            // style={{
+            //   backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${backgroundImage1})`,
+            //   backgroundSize: "cover",
+            //   backgroundPosition: "center",
+            //   backgroundRepeat: "repeat",
+            // }}
+          >
+            <div className="container mx-auto px-4 text-center">
+              <h2 className="text-4xl font-bold mb-4 text-white">
+                Ready to Transform Your Business?
+              </h2>
+              <div className="w-24 h-1 bg-white mx-auto mb-8"></div>
+              <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
+                Join thousands of companies who trust ALIF to drive their
+                digital transformation and achieve exceptional results.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button className="px-8 py-4 bg-white text-[#B31F7E] font-semibold rounded-xl hover:bg-gray-100 transition-colors">
+                  Get Started Today
+                </button>
+                <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-[#B31F7E] transition-colors">
+                  Schedule a Consultation
+                </button>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
     </div>
   );

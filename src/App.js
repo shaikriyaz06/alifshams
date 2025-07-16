@@ -8,6 +8,8 @@ import Journey from "./Journey";
 import Contact from "./Contact";
 import Footer from "./Footer";
 import { useScrollMemory } from "./hooks/useScrollMemory";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import AIConsulting from "./components/ui/AIConsulting/AIConsulting";
 import AIStrategy from "./components/ui/AIConsulting/AIStrategy";
 import BusinessTechnology from "./components/ui/Business and Technology Consulting/businessandTechnology";
@@ -31,7 +33,12 @@ import VideoMarketing from "./components/ui/Digital Marketing/VideoMarketing";
 import InfluencerMarketing from "./components/ui/Digital Marketing/InfluencerMarketing";
 
 function AppContent() {
+  const location = useLocation();
   useScrollMemory();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
     <div>

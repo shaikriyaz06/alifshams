@@ -3,7 +3,8 @@ import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useAnimation, useTransform } from "framer-motion";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
-import backgroundImage1 from "../src/assets/industries1.png";
+// import backgroundImage1 from "../src/assets/industries1.png";
+import backgroundImage1 from "../src/assets/background4.jpg";
 const carouselData = [
   {
     id: "Discover",
@@ -100,22 +101,22 @@ export default function CarouselSliderTailwind() {
       ref={sectionRef}
       style={{
         backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${backgroundImage1})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'repeat',
-        backgroundAttachment: 'fixed'
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "repeat",
+        backgroundAttachment: "fixed",
       }}
     >
       <div className="max-w-6xl mx-auto h-auto px-4">
-        <h2 className="text-4xl font-bold mb-2 text-center text-[#B31F7E]">
+        <h2 className="text-4xl font-heading font-semibold mb-2 text-center text-[#B31F7E] tracking-tight">
           The ALIF Approach - 4D2E
         </h2>
-        <div className="grid grid-cols-2 gap-8 py-4">
+        <div className="grid grid-cols-2 gap-24 py-4">
           {/* LEFT: List */}
 
           <motion.div style={{ x: leftX }}>
             <div className="text-left mb-6 tex">
-              <p className="text-2xl  text-[#B31F7E] font-bold">
+              <p className="text-2xl text-[#B31F7E] font-heading font-semibold tracking-tight uppercase">
                 Our 6-Phase Engagement Model
               </p>
             </div>
@@ -126,8 +127,8 @@ export default function CarouselSliderTailwind() {
                   key={item.id}
                   className={`group transition-all duration-300 ${
                     index === activeIndex
-                      ? "text-[#B31F7E] text-xl font-bold"
-                      : "text-blue-700"
+                      ? "text-[#B31F7E] text-xl font-semibold"
+                      : "text-white"
                   }`}
                 >
                   <Link
@@ -142,12 +143,12 @@ export default function CarouselSliderTailwind() {
                       className={`transition-all duration-300 ${
                         index === activeIndex
                           ? "text-[#B31F7E] text-xl"
-                          : "text-[#B31F7E] text-lg"
+                          : "text-white text-lg"
                       }`}
                     >
                       ➤
                     </span>
-                    <span className="font-medium whitespace-nowrap">
+                    <span className="font-body font-medium whitespace-nowrap tracking-wide uppercase">
                       Phase {index + 1}: {item.title}
                     </span>
                   </Link>
@@ -173,13 +174,13 @@ export default function CarouselSliderTailwind() {
               </p>
             </div> */}
 
-            <div className="relative flex items-center justify-center h-[300px] overflow-hidden">
+            <div className="relative flex items-center justify-center h-[350px] overflow-hidden">
               {carouselData.map((item, index) => {
                 const { position, bg } = getCardStyles(index);
                 return (
                   <div
                     key={item.id}
-                    className={`absolute h-full transition-all duration-700 ease-in-out transform w-[50%] ${bg} rounded-xl shadow-xl px-3 py-2 text-center ${position}`}
+                    className={`absolute h-full transition-all duration-700 ease-in-out transform w-[50%] ${bg} rounded-xl shadow-xl px-2 py-2 text-center ${position}`}
                   >
                     <div className="flex items-center justify-between h-full">
                       {/* Left Arrow */}
@@ -191,10 +192,10 @@ export default function CarouselSliderTailwind() {
                       </button>
 
                       <div className="flex-1 px-2">
-                        <h3 className="text-2xl text-left font-semibold text-white mb-4">
+                        <h3 className="text-2xl text-left font-heading font-semibold text-white mb-4 tracking-tight uppercase">
                           {item.title}
                         </h3>
-                        <p className="text-white justify-center !text-left text-sm mb-6">
+                        <p className="text-white !justify-center !text-left text-[13px] mb-6 font-body leading-relaxed">
                           {item.content}
                         </p>
                       </div>
