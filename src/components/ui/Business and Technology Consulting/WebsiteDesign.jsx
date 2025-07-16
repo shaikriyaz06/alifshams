@@ -1,6 +1,6 @@
 import React from "react";
-import aiImage from "../../../assets/software.avif";
-import strategyImage from "../../../assets/AI-Consulting.webp";
+import aiImage from "../../../assets/webdesignMain.jpg";
+import strategyImage from "../../../assets/webdesign.jpg";
 
 export default function WebsiteDesign() {
   return (

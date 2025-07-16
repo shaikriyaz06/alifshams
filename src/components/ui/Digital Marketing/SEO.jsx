@@ -1,6 +1,6 @@
 import React from "react";
-import aiImage from "../../../assets/software.avif";
-import strategyImage from "../../../assets/AI-Consulting.webp";
+import aiImage from "../../../assets/SEO.jpg";
+import strategyImage from "../../../assets/SEO-2.jpg";
 
 export default function SEO() {
   return (

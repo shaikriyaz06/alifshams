@@ -1,6 +1,6 @@
 import React from "react";
-import aiImage from "../../../assets/software.avif";
-import strategyImage from "../../../assets/AI-Consulting.webp";
+import aiImage from "../../../assets/AI-Ethics2.jpeg";
+import strategyImage from "../../../assets/AI-Ethics1.jpeg";
 
 export default function EthicalAI() {
   return (

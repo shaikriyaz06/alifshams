@@ -1,6 +1,6 @@
 import React from "react";
-import aiImage from "../../../assets/software.avif";
-import strategyImage from "../../../assets/AI-Consulting.webp";
+import aiImage from "../../../assets/GEN AI.jpg";
+import strategyImage from "../../../assets/GEN AI2.jpg";
 
 export default function GenerativeAI() {
   return (

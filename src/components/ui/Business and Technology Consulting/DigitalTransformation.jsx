@@ -1,6 +1,6 @@
 import React from "react";
-import aiImage from "../../../assets/software.avif";
-import strategyImage from "../../../assets/AI-Consulting.webp";
+import aiImage from "../../../assets/Digital-Transformation.jpg.webp";
+import strategyImage from "../../../assets/Digital-Transformation1.webp";
 
 export default function DigitalTransformation() {
   return (

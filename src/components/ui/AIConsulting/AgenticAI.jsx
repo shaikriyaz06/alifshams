@@ -1,6 +1,6 @@
 import React from "react";
-import aiImage from "../../../assets/software.avif";
-import strategyImage from "../../../assets/AI-Consulting.webp";
+import aiImage from "../../../assets/AgenticAI.jpg";
+import strategyImage from "../../../assets/AgenticAI1.avif";
 
 export default function AgenticAI() {
   return (

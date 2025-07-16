@@ -1,6 +1,6 @@
 import React from "react";
-import aiImage from "../../../assets/software.avif";
-import strategyImage from "../../../assets/AI-Consulting.webp";
+import aiImage from "../../../assets/VM.jpg";
+import strategyImage from "../../../assets/VM1.jpg";
 
 export default function VideoMarketing() {
   return (
@@ -13,7 +13,7 @@ export default function VideoMarketing() {
             alt="Video Marketing"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/60"></div>
+          <div className="absolute inset-0 bg-black opacity-80"></div>
         </div>
         <div className="relative z-10 text-center text-white px-4">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">

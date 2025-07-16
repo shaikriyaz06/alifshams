@@ -1,6 +1,6 @@
 import React from "react";
-import aiImage from "../../../assets/software.avif";
-import strategyImage from "../../../assets/AI-Consulting.webp";
+import aiImage from "../../../assets/Demand-Generation.jpeg";
+import strategyImage from "../../../assets/Demand-Generation1.jpeg";
 
 export default function DemandGeneration() {
   return (
@@ -15,7 +15,7 @@ export default function DemandGeneration() {
           />
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
-        <div className="relative z-10 text-center text-white px-4">
+        <div className="relative top-32 z-10 text-center text-white px-4">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">
             Demand Generation & Sales Pipelines
           </h1>

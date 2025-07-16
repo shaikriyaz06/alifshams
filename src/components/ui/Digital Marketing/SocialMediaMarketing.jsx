@@ -1,6 +1,6 @@
 import React from "react";
-import aiImage from "../../../assets/software.avif";
-import strategyImage from "../../../assets/AI-Consulting.webp";
+import aiImage from "../../../assets/SMM1.jpg";
+import strategyImage from "../../../assets/SMM-2.jpg";
 
 export default function SocialMediaMarketing() {
   return (
@@ -13,14 +13,15 @@ export default function SocialMediaMarketing() {
             alt="Social Media Marketing (SMM)"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/60"></div>
+          <div className="absolute inset-0 bg-black bg-opacity-80"></div>
         </div>
         <div className="relative z-10 text-center text-white px-4">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">
             Social Media Marketing (SMM)
           </h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto">
-            Curate engaging social content strategies and run targeted ad campaigns across platforms
+            Curate engaging social content strategies and run targeted ad
+            campaigns across platforms
           </p>
         </div>
       </section>
@@ -44,10 +45,13 @@ export default function SocialMediaMarketing() {
                 Social Media Marketing (SMM)
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                Curate engaging social content strategies and run targeted ad campaigns across platforms.
+                Curate engaging social content strategies and run targeted ad
+                campaigns across platforms.
               </p>
               <p className="text-lg text-gray-700 leading-relaxed">
-                We build strong social media presence through strategic content creation and targeted advertising that engages your audience and drives brand awareness.
+                We build strong social media presence through strategic content
+                creation and targeted advertising that engages your audience and
+                drives brand awareness.
               </p>
             </div>
           </div>

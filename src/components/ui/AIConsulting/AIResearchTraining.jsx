@@ -1,6 +1,6 @@
 import React from "react";
-import aiImage from "../../../assets/software.avif";
-import strategyImage from "../../../assets/AI-Consulting.webp";
+import aiImage from "../../../assets/AI-training.png";
+import strategyImage from "../../../assets/AI-research2.webp";
 
 export default function AIResearchTraining() {
   return (

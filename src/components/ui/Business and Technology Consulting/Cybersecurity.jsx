@@ -1,6 +1,6 @@
 import React from "react";
-import aiImage from "../../../assets/software.avif";
-import strategyImage from "../../../assets/AI-Consulting.webp";
+import aiImage from "../../../assets/cybersecurity.webp";
+import strategyImage from "../../../assets/cybersecurity1.webp";
 
 export default function Cybersecurity() {
   return (

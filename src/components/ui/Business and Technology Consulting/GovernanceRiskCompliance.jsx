@@ -1,6 +1,6 @@
 import React from "react";
-import aiImage from "../../../assets/software.avif";
-import strategyImage from "../../../assets/AI-Consulting.webp";
+import aiImage from "../../../assets/GRC1.png";
+import strategyImage from "../../../assets/compliance.jpeg";
 
 export default function GovernanceRiskCompliance() {
   return (
