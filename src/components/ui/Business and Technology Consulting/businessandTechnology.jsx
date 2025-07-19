@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import aiImage from "../../../assets/software.avif";
-import strategyImage from "../../../assets/AI-Consulting.webp";
-import customImage from "../../../assets/AI-Consulting.webp";
-import genaiImage from "../../../assets/AI-Consulting.webp";
-import agenticImage from "../../../assets/AI-Consulting.webp";
-import ethicalImage from "../../../assets/AI-Consulting.webp";
-import researchImage from "../../../assets/AI-Consulting.webp";
+import aiImage from "../../../assets/Business.jpg";
+import strategyImage from "../../../assets/MS.png";
+import customImage from "../../../assets/webdesign.jpg";
+import genaiImage from "../../../assets/cloudSolutions1.webp";
+import agenticImage from "../../../assets/cybersecurity.webp";
+import ethicalImage from "../../../assets/Digital-Transformation.jpg.webp";
+import researchImage from "../../../assets/compliance.jpeg";
 
 export default function BusinessTechnology() {
   const [activeService, setActiveService] = useState(0);

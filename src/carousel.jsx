@@ -106,15 +106,19 @@ export default function CarouselSliderTailwind() {
         backgroundRepeat: "repeat",
         backgroundAttachment: "fixed",
       }}
+      data-aos="fade-up"
     >
       <div className="max-w-6xl mx-auto h-auto px-4">
-        <h2 className="text-4xl font-heading font-semibold mb-2 text-center text-[#B31F7E] tracking-tight">
+        <h2
+          data-aos="flip-up"
+          className="text-4xl font-heading font-semibold mb-2 text-center text-[#B31F7E] tracking-tight"
+        >
           The ALIF Approach - 4D2E
         </h2>
         <div className="grid grid-cols-2 gap-24 py-4">
           {/* LEFT: List */}
 
-          <motion.div style={{ x: leftX }}>
+          <motion.div data-aos="fade-left" style={{ x: leftX }}>
             <div className="text-left mb-6 tex">
               <p className="text-2xl text-[#B31F7E] font-heading font-semibold tracking-tight uppercase">
                 Our 6-Phase Engagement Model
@@ -158,7 +162,7 @@ export default function CarouselSliderTailwind() {
           </motion.div>
 
           {/* RIGHT: Carousel */}
-          <motion.div style={{ x: rightX }}>
+          <motion.div data-aos="fade-right" style={{ x: rightX }}>
             {/* <div className="text-center mb-4">
               <h3 className="text-xl font-semibold text-[#B31F7E]">
                 We work as your transformation partner by combining:

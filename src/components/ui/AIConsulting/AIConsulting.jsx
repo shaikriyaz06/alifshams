@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import aiImage from "../../../assets/software.avif";
+import aiImage from "../../../assets/AIConsulting.jpeg";
 import strategyImage from "../../../assets/AI-Consulting.webp";
-import customImage from "../../../assets/AI-Consulting.webp";
-import genaiImage from "../../../assets/AI-Consulting.webp";
-import agenticImage from "../../../assets/AI-Consulting.webp";
-import ethicalImage from "../../../assets/AI-Consulting.webp";
-import researchImage from "../../../assets/AI-Consulting.webp";
+import customImage from "../../../assets/customAIDevelopment.avif";
+import genaiImage from "../../../assets/GEN AI.jpg";
+import agenticImage from "../../../assets/AgenticAI1.avif";
+import ethicalImage from "../../../assets/AI-Ethics1.jpeg";
+import researchImage from "../../../assets/AI-research3.webp";
 
 export default function AIConsulting() {
   const [activeService, setActiveService] = useState(0);

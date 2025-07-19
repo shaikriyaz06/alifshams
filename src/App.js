@@ -14,7 +14,7 @@ import AIConsulting from "./components/ui/AIConsulting/AIConsulting";
 import AIStrategy from "./components/ui/AIConsulting/AIStrategy";
 import BusinessTechnology from "./components/ui/Business and Technology Consulting/businessandTechnology";
 import DigitalMarketing from "./components/ui/Digital Marketing/digitalMarketing";
-import CustomAIDevelopment from './components/ui/AIConsulting/CustomAIDevelopment'
+import CustomAIDevelopment from "./components/ui/AIConsulting/CustomAIDevelopment";
 import GenerativeAI from "./components/ui/AIConsulting/GenerativeAI";
 import AgenticAI from "./components/ui/AIConsulting/AgenticAI";
 import EthicalAI from "./components/ui/AIConsulting/EthicalAI";
@@ -31,15 +31,23 @@ import SocialMediaMarketing from "./components/ui/Digital Marketing/SocialMediaM
 import EmailContentMarketing from "./components/ui/Digital Marketing/EmailContentMarketing";
 import VideoMarketing from "./components/ui/Digital Marketing/VideoMarketing";
 import InfluencerMarketing from "./components/ui/Digital Marketing/InfluencerMarketing";
+import AOS from 'aos';
+import "aos/dist/aos.css";
 
 function AppContent() {
   const location = useLocation();
   useScrollMemory();
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
-
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false,
+      mirror: true,
+    });
+  }, []);
   return (
     <div>
       <Navbar />
@@ -48,26 +56,106 @@ function AppContent() {
           <Route exact path="/" element={<Home />} />
           <Route path="/solutions" element={<Solutions />} />
           <Route path="/solutions/AIConsulting" element={<AIConsulting />} />
-          <Route exact path="/solutions/AIConsulting/AIstrategy" element={<AIStrategy />} />
-          <Route exact path="/solutions/AIConsulting/customAI-development" element={<CustomAIDevelopment />} />
-          <Route exact path="/solutions/AIConsulting/genAI-development" element={<GenerativeAI />} />
-          <Route exact path="/solutions/AIConsulting/agenticAI" element={<AgenticAI />} />
-          <Route exact path="/solutions/AIConsulting/ethicalAI-compliance" element={<EthicalAI />} />
-          <Route exact path="/solutions/AIConsulting/AI-research" element={<AIResearchTraining />} />
-          <Route exact path="/solutions/business-technology" element={<BusinessTechnology />} />
-          <Route exact path="/solutions/business-technology/microsoft" element={<MicrosoftServices />} />
-          <Route exact path="/solutions/business-technology/website-design" element={<WebsiteDesign />} />
-          <Route exact path="/solutions/business-technology/cloud-solutions" element={<CloudSolutions />} />
-          <Route exact path="/solutions/business-technology/cybersecurity" element={<Cybersecurity />} />
-          <Route exact path="/solutions/business-technology/strategy-digitalTransformation" element={<DigitalTransformation />} />
-          <Route exact path="/solutions/business-technology/risk-compliance" element={<GovernanceRiskCompliance />} />
-          <Route exact path="/solutions/digital-marketing" element={<DigitalMarketing />} />
-          <Route exact path="/solutions/digital-marketing/demand-generation" element={<DemandGeneration />} />
-          <Route exact path="/solutions/digital-marketing/seo" element={<SEO />} />
-          <Route exact path="/solutions/digital-marketing/smm" element={<SocialMediaMarketing />} />
-          <Route exact path="/solutions/digital-marketing/content-marketing" element={<EmailContentMarketing />} />
-          <Route exact path="/solutions/digital-marketing/video-marketing" element={<VideoMarketing />} />
-          <Route exact path="/solutions/digital-marketing/influencer-marketing" element={<InfluencerMarketing />} />
+          <Route
+            exact
+            path="/solutions/AIConsulting/AIstrategy"
+            element={<AIStrategy />}
+          />
+          <Route
+            exact
+            path="/solutions/AIConsulting/customAI-development"
+            element={<CustomAIDevelopment />}
+          />
+          <Route
+            exact
+            path="/solutions/AIConsulting/genAI-development"
+            element={<GenerativeAI />}
+          />
+          <Route
+            exact
+            path="/solutions/AIConsulting/agenticAI"
+            element={<AgenticAI />}
+          />
+          <Route
+            exact
+            path="/solutions/AIConsulting/ethicalAI-compliance"
+            element={<EthicalAI />}
+          />
+          <Route
+            exact
+            path="/solutions/AIConsulting/AI-research"
+            element={<AIResearchTraining />}
+          />
+          <Route
+            exact
+            path="/solutions/business-technology"
+            element={<BusinessTechnology />}
+          />
+          <Route
+            exact
+            path="/solutions/business-technology/microsoft"
+            element={<MicrosoftServices />}
+          />
+          <Route
+            exact
+            path="/solutions/business-technology/website-design"
+            element={<WebsiteDesign />}
+          />
+          <Route
+            exact
+            path="/solutions/business-technology/cloud-solutions"
+            element={<CloudSolutions />}
+          />
+          <Route
+            exact
+            path="/solutions/business-technology/cybersecurity"
+            element={<Cybersecurity />}
+          />
+          <Route
+            exact
+            path="/solutions/business-technology/strategy-digitalTransformation"
+            element={<DigitalTransformation />}
+          />
+          <Route
+            exact
+            path="/solutions/business-technology/risk-compliance"
+            element={<GovernanceRiskCompliance />}
+          />
+          <Route
+            exact
+            path="/solutions/digital-marketing"
+            element={<DigitalMarketing />}
+          />
+          <Route
+            exact
+            path="/solutions/digital-marketing/demand-generation"
+            element={<DemandGeneration />}
+          />
+          <Route
+            exact
+            path="/solutions/digital-marketing/seo"
+            element={<SEO />}
+          />
+          <Route
+            exact
+            path="/solutions/digital-marketing/smm"
+            element={<SocialMediaMarketing />}
+          />
+          <Route
+            exact
+            path="/solutions/digital-marketing/content-marketing"
+            element={<EmailContentMarketing />}
+          />
+          <Route
+            exact
+            path="/solutions/digital-marketing/video-marketing"
+            element={<VideoMarketing />}
+          />
+          <Route
+            exact
+            path="/solutions/digital-marketing/influencer-marketing"
+            element={<InfluencerMarketing />}
+          />
           <Route path="/about" element={<About />} />
           <Route path="/journey" element={<Journey />} />
           <Route path="/contact" element={<Contact />} />

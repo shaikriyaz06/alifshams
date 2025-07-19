@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import aiImage from "../../../assets/software.avif";
-import strategyImage from "../../../assets/AI-Consulting.webp";
-import customImage from "../../../assets/AI-Consulting.webp";
-import genaiImage from "../../../assets/AI-Consulting.webp";
-import agenticImage from "../../../assets/AI-Consulting.webp";
-import ethicalImage from "../../../assets/AI-Consulting.webp";
-import researchImage from "../../../assets/AI-Consulting.webp";
+import aiImage from "../../../assets/DigitalMarketing.jpg";
+import strategyImage from "../../../assets/Demand-Generation.jpeg";
+import customImage from "../../../assets/SEO.jpg";
+import genaiImage from "../../../assets/SMM-2.jpg";
+import agenticImage from "../../../assets/EMAIL1.jpg";
+import ethicalImage from "../../../assets/VM1.jpeg";
+import researchImage from "../../../assets/IM1.jpg";
 
 export default function DigitalMarketing() {
   const [activeService, setActiveService] = useState(0);

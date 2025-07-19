@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -12,65 +12,65 @@ import {
   Select,
   MenuItem,
   FormControl,
-  InputLabel
-} from '@mui/material';
+  InputLabel,
+} from "@mui/material";
 import {
   Email,
   LocationOn,
   Send,
   Phone,
   Business,
-  CloudUpload
-} from '@mui/icons-material';
-import { toast } from 'react-toastify';
-import axios from 'axios';
-import contactImage from './assets/industries1.png';
+  CloudUpload,
+} from "@mui/icons-material";
+import { toast } from "react-toastify";
+import axios from "axios";
+import contactImage from "./assets/contactus.jpg";
 
 const ContactUs = () => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    userType: '',
-    name: '',
-    email: '',
-    phone: '',
-    countryCode: '',
-    companyName: '',
-    serviceOfInterest: '',
-    message: '',
-    yearsOfExperience: '',
-    keySkills: '',
-    education: '',
-    availability: '',
-    linkedinProfile: '',
-    portfolio: '',
-    coverLetter: '',
-    resume: null
+    userType: "",
+    name: "",
+    email: "",
+    phone: "",
+    countryCode: "",
+    companyName: "",
+    serviceOfInterest: "",
+    message: "",
+    yearsOfExperience: "",
+    keySkills: "",
+    education: "",
+    availability: "",
+    linkedinProfile: "",
+    portfolio: "",
+    coverLetter: "",
+    resume: null,
   });
 
   const services = [
-    'IT Consulting & Solutions',
-    'Business Consulting',
-    'Tailored Talent Solutions'
+    "IT Consulting & Solutions",
+    "Business Consulting",
+    "Tailored Talent Solutions",
   ];
 
   const availabilityOptions = [
-    'Immediately',
-    '15-30 days',
-    '30-60 days',
-    'More than 60 days'
+    "Immediately",
+    "15-30 days",
+    "30-60 days",
+    "More than 60 days",
   ];
 
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleFileChange = (e) => {
     setFormData({
       ...formData,
-      resume: e.target.files[0]
+      resume: e.target.files[0],
     });
   };
 
@@ -79,42 +79,37 @@ const ContactUs = () => {
     setLoading(true);
     try {
       let response;
-      const isClient = formData.userType === 'client';
-
+      const isClient = formData.userType === "client";
+      const isJobSeeker = formData.userType === "jobSeeker";
       if (isClient) {
-        response = await axios.post("/user/mail", formData);
-      } else {
-        const formDataToSend = new FormData();
-        Object.keys(formData).forEach((key) => {
-          if (key === 'resume' && formData[key]) {
-            formDataToSend.append('resume', formData[key]);
-          } else {
-            formDataToSend.append(key, formData[key] || '');
-          }
-        });
-        response = await axios.post("/user/contactus", formDataToSend, {
-          headers: { 'Content-Type': 'multipart/form-data' }
+        response = await axios.post(
+          "http://localhost:8000/user/mail",
+          formData
+        );
+      } else if (isJobSeeker) {
+        response = await axios.post("http://localhost:8000/user/contactus", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
         });
       }
-
+      console.log(response)
       toast.success("Form submitted successfully!", { autoClose: 3000 });
       setFormData({
-        userType: '',
-        name: '',
-        email: '',
-        phone: '',
-        countryCode: '',
-        companyName: '',
-        serviceOfInterest: '',
-        message: '',
-        yearsOfExperience: '',
-        keySkills: '',
-        education: '',
-        availability: '',
-        linkedinProfile: '',
-        portfolio: '',
-        coverLetter: '',
-        resume: null
+        userType: "",
+        name: "",
+        email: "",
+        phone: "",
+        countryCode: "",
+        companyName: "",
+        serviceOfInterest: "",
+        message: "",
+        yearsOfExperience: "",
+        keySkills: "",
+        education: "",
+        availability: "",
+        linkedinProfile: "",
+        portfolio: "",
+        coverLetter: "",
+        resume: null,
       });
     } catch (error) {
       toast.error("Error submitting form", { autoClose: 3000 });
@@ -275,16 +270,16 @@ const ContactUs = () => {
   );
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: 'black' }}>
+    <Box sx={{ minHeight: "100vh" }}>
       {/* Hero Section */}
       <Box
         sx={{
-          position: 'relative',
-          height: '400px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden'
+          position: "relative",
+          height: "400px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden",
         }}
       >
         <Box
@@ -292,34 +287,43 @@ const ContactUs = () => {
           src={contactImage}
           alt="Contact Us"
           sx={{
-            position: 'absolute',
+            position: "absolute",
             top: 0,
             left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            opacity: 0.5,
-            zIndex: -2
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            opacity: 0.8,
+            zIndex: -2,
+            objectPosition: "80% 0%",
           }}
         />
         <Box
           sx={{
-            position: 'absolute',
+            position: "absolute",
             top: 0,
             left: 0,
-            width: '100%',
-            height: '100%',
-            bgcolor: 'rgba(0,0,0,0.5)',
-            zIndex: -1
+            width: "100%",
+            height: "100%",
+            bgcolor: "rgba(0,0,0,0.5)",
+            zIndex: -1,
           }}
         />
-        <Container maxWidth="lg" sx={{ textAlign: 'center', color: 'white', zIndex: 1 }}>
-          <Typography variant="h2" component="h1" sx={{ fontWeight: 'bold', mb: 3, pt: 14 }}>
+        <Container
+          maxWidth="lg"
+          sx={{ textAlign: "center", color: "white", zIndex: 1 }}
+        >
+          <Typography
+            variant="h2"
+            component="h1"
+            sx={{ fontWeight: "bold", mb: 3, pt: 14 }}
+          >
             Contact Us
           </Typography>
-          <Typography variant="h6" sx={{ maxWidth: '800px', mx: 'auto' }}>
-            We're here to provide innovative AI solutions tailored to your needs. 
-            Get in touch with us to discuss how we can bring your vision to life with precision and excellence.
+          <Typography variant="h6" sx={{ maxWidth: "800px", mx: "auto" }}>
+            We're here to provide innovative AI solutions tailored to your
+            needs. Get in touch with us to discuss how we can bring your vision
+            to life with precision and excellence.
           </Typography>
         </Container>
       </Box>
@@ -330,34 +334,43 @@ const ContactUs = () => {
           {/* Contact Information */}
           <Grid item xs={12} lg={4}>
             <Box sx={{ mb: 4 }}>
-              <Typography variant="h4" sx={{ color: 'white', mb: 2 }}>
+              <Typography variant="h4" sx={{ color: "white", mb: 2 }}>
                 Get in Touch
               </Typography>
-              <Typography variant="body1" sx={{ color: 'grey.300' }}>
-                We're here to help and answer any question you might have. We look forward to hearing from you.
+              <Typography variant="body1" sx={{ color: "grey.300" }}>
+                We're here to help and answer any question you might have. We
+                look forward to hearing from you.
               </Typography>
             </Box>
 
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-              <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-                <Email sx={{ color: 'white', fontSize: 24, mt: 0.5, mr: 2 }} />
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+              <Box sx={{ display: "flex", alignItems: "flex-start" }}>
+                <Email sx={{ color: "white", fontSize: 24, mt: 0.5, mr: 2 }} />
                 <Box>
-                  <Typography variant="h6" sx={{ color: 'white', fontWeight: 'bold' }}>
+                  <Typography
+                    variant="h6"
+                    sx={{ color: "white", fontWeight: "bold" }}
+                  >
                     Email
                   </Typography>
-                  <Typography variant="body2" sx={{ color: 'grey.300' }}>
+                  <Typography variant="body2" sx={{ color: "grey.300" }}>
                     contact@alifshams.com
                   </Typography>
                 </Box>
               </Box>
 
-              <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-                <LocationOn sx={{ color: 'white', fontSize: 24, mt: 0.5, mr: 2 }} />
+              <Box sx={{ display: "flex", alignItems: "flex-start" }}>
+                <LocationOn
+                  sx={{ color: "white", fontSize: 24, mt: 0.5, mr: 2 }}
+                />
                 <Box>
-                  <Typography variant="h6" sx={{ color: 'white', fontWeight: 'bold' }}>
+                  <Typography
+                    variant="h6"
+                    sx={{ color: "white", fontWeight: "bold" }}
+                  >
                     Headquarters
                   </Typography>
-                  <Typography variant="body2" sx={{ color: 'grey.300' }}>
+                  <Typography variant="body2" sx={{ color: "grey.300" }}>
                     Innovation Hub, Tech City, Hyderabad, Telangana - 500001
                   </Typography>
                 </Box>
@@ -367,8 +380,8 @@ const ContactUs = () => {
 
           {/* Contact Form */}
           <Grid item xs={12} lg={8}>
-            <Card sx={{ p: 4, bgcolor: 'grey.100' }}>
-              <Typography variant="h4" sx={{ mb: 3, fontWeight: 'bold' }}>
+            <Card sx={{ p: 4, bgcolor: "grey.100" }}>
+              <Typography variant="h4" sx={{ mb: 3, fontWeight: "bold" }}>
                 Send Us a Message
               </Typography>
               <form onSubmit={handleSubmit}>
@@ -452,8 +465,8 @@ const ContactUs = () => {
                     />
                   </Grid>
 
-                  {formData.userType === 'client' && renderClientFields()}
-                  {formData.userType === 'jobSeeker' && renderJobSeekerFields()}
+                  {formData.userType === "client" && renderClientFields()}
+                  {formData.userType === "jobSeeker" && renderJobSeekerFields()}
 
                   <Grid item xs={12}>
                     <TextField
@@ -468,7 +481,7 @@ const ContactUs = () => {
                       variant="outlined"
                     />
                   </Grid>
-                  
+
                   <Grid item xs={12}>
                     <Button
                       type="submit"
@@ -477,14 +490,14 @@ const ContactUs = () => {
                       disabled={loading}
                       startIcon={<Send />}
                       sx={{
-                        bgcolor: '#B31F7E',
-                        '&:hover': { bgcolor: '#482A7A' },
+                        bgcolor: "#B31F7E",
+                        "&:hover": { bgcolor: "#482A7A" },
                         px: 4,
                         py: 1.5,
-                        fontWeight: 'bold'
+                        fontWeight: "bold",
                       }}
                     >
-                      {loading ? 'Sending...' : 'Send Message'}
+                      {loading ? "Sending..." : "Send Message"}
                     </Button>
                   </Grid>
                 </Grid>
@@ -496,17 +509,20 @@ const ContactUs = () => {
 
       {/* Google Map Section */}
       <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Typography variant="h4" sx={{ textAlign: 'center', mb: 6, color: 'white' }}>
+        <Typography
+          variant="h4"
+          sx={{ textAlign: "center", mb: 6, color: "white" }}
+        >
           Find Us
         </Typography>
-        <Paper sx={{ height: '400px', borderRadius: 2, overflow: 'hidden' }}>
+        <Paper sx={{ height: "400px", borderRadius: 2, overflow: "hidden" }}>
           <iframe
             title="Google Map"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.8368324924766!2d78.4411097!3d17.4004712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb971466381c91%3A0xc855906f2903c236!2sMasab%20Tank%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1702599999999!5m2!1sen!2sin"
             style={{
-              width: '100%',
-              height: '100%',
-              border: 0
+              width: "100%",
+              height: "100%",
+              border: 0,
             }}
             allowFullScreen=""
             loading="lazy"

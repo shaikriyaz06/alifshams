@@ -250,10 +250,10 @@ export default function Home() {
           </video>
         </div>
         <div className="relative z-10 flex h-full flex-col items-center justify-center bg-black/60 px-8 text-center">
-          <h1 className="mb-4 font-sans text-5xl font-extrabold text-white md:text-6xl lg:text-7xl">
+          <h1 data-aos="fade-right" className="mb-4 font-sans text-5xl font-extrabold text-white md:text-6xl lg:text-7xl">
             Welcome to <span className="text-white">ALIF</span>
           </h1>
-          <p className="mx-auto max-w-3xl text-lg text-white md:text-xl lg:text-2xl">
+          <p data-aos="fade-left" className="mx-auto max-w-3xl text-lg text-white md:text-xl lg:text-2xl">
             Transforming ideas into reality through innovation and excellence
           </p>
           <Link to="/solutions/AIConsulting/AIstrategy">
@@ -264,11 +264,11 @@ export default function Home() {
         </div>
       </div>
       <div>
-        <div>
+        <div >
           <Carouselcomponent />
         </div>
 
-        <div className="relative">
+        <div data-aos="fade-up" className="relative">
           <section
             className="z-10 px-10 pb-10"
             ref={newsRef}
@@ -279,8 +279,8 @@ export default function Home() {
               backgroundRepeat: "repeat",
             }}
           >
-            <div className="container mx-auto px-4 py-10 ">
-              <h2 className="text-4xl text-[#B31F7E] font-bold text-center mb-4">
+            <div data-aos="fade-up" className="container mx-auto px-4 py-10 ">
+              <h2  className="text-4xl text-[#B31F7E] font-bold text-center mb-4">
                 Our Domains
               </h2>
               <div className="w-24 h-1 bg-white mx-auto"></div>
@@ -348,7 +348,7 @@ export default function Home() {
               backgroundRepeat: "repeat",
             }}
           >
-            <motion.section className="py-10 px-20 text-white w-full z-20 relative">
+            <motion.section data-aos="fade-up" className="py-10 px-20 text-white w-full z-20 relative">
               <h2 className="text-4xl font-bold text-center mb-4 text-[#B31F7E]">
                 Industries
               </h2>
@@ -542,12 +542,16 @@ export default function Home() {
                 digital transformation and achieve exceptional results.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-4 bg-white text-[#B31F7E] font-semibold rounded-xl hover:bg-gray-100 transition-colors">
-                  Get Started Today
-                </button>
-                <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-[#B31F7E] transition-colors">
-                  Schedule a Consultation
-                </button>
+                <Link to="/contact">
+                  <button className="px-8 py-4 bg-white text-[#B31F7E] font-semibold rounded-xl hover:bg-gray-100 transition-colors">
+                    Contact Us Now
+                  </button>
+                </Link>
+                <Link to="solutions/AIConsulting">
+                  <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-[#B31F7E] transition-colors">
+                    Explore Services
+                  </button>
+                </Link>
               </div>
             </div>
           </section>
