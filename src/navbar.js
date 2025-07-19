@@ -104,7 +104,7 @@ function Navbar() {
       ],
     },
     {
-      to: "/solutions/caseStudies",
+      to: "#",
       label: "Case Studies",
       submenu: [
         {
