@@ -6,6 +6,8 @@ import genaiImage from "../../../assets/GEN AI.jpg";
 import agenticImage from "../../../assets/AgenticAI1.avif";
 import ethicalImage from "../../../assets/AI-Ethics1.jpeg";
 import researchImage from "../../../assets/AI-research3.webp";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 export default function AIConsulting() {
   const [activeService, setActiveService] = useState(0);
@@ -14,36 +16,42 @@ export default function AIConsulting() {
     {
       title: "AI Strategy - Development & Implementation",
       image: strategyImage,
+      link: "/solutions/AIConsulting/AIstrategy",
       content:
         "Develop comprehensive AI roadmaps aligned with business objectives. We assess your current capabilities, identify opportunities, and create strategic implementation plans that drive measurable ROI and competitive advantage.",
     },
     {
       title: "Custom AI Development",
       image: customImage,
+      link: "/solutions/AIConsulting/customAI-development",
       content:
         "Build tailored AI solutions from scratch using cutting-edge technologies. Our expert team develops machine learning models, neural networks, and AI applications specifically designed for your unique business requirements.",
     },
     {
       title: "Generative AI Development & Services",
       image: genaiImage,
+      link: "/solutions/AIConsulting/genAI-development",
       content:
         "Harness the power of generative AI with custom LLMs, chatbots, and content generation systems. We implement GPT-based solutions, fine-tune models, and create AI-powered creative tools for your organization.",
     },
     {
       title: "Agentic AI",
       image: agenticImage,
+      link: "/solutions/AIConsulting/agenticAI",
       content:
         "Deploy autonomous AI agents that can perform complex tasks independently. Our agentic AI solutions include intelligent automation, decision-making systems, and self-learning agents that adapt to changing environments.",
     },
     {
       title: "Ethical AI and Compliance",
       image: ethicalImage,
+      link: "/solutions/AIConsulting/ethicalAI-compliance",
       content:
         "Ensure responsible AI deployment with comprehensive ethics frameworks and compliance strategies. We implement bias detection, fairness metrics, transparency measures, and regulatory compliance protocols.",
     },
     {
       title: "AI Research & Training",
       image: researchImage,
+      link: "/solutions/AIConsulting/AI-research",
       content:
         "Stay ahead with cutting-edge AI research and comprehensive team training programs. We provide workshops, certification courses, and ongoing support to build internal AI capabilities within your organization.",
     },
@@ -130,6 +138,13 @@ export default function AIConsulting() {
                   <p className="text-gray-700 leading-relaxed">
                     {services[activeService].content}
                   </p>
+                  <div className="mt-5">
+                    <Link  to={services[activeService].link}>
+                      <Button className="!bg-[#B31F7E] !text-white">
+                        Know More
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

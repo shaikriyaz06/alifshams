@@ -58,8 +58,14 @@ function Navbar() {
           to: "/solutions/business-technology/website-design",
           label: "Website Design & Development",
         },
-        { to: "/solutions/business-technology/cloud-solutions", label: "Cloud Solutions" },
-        { to: "/solutions/business-technology/cybersecurity", label: "Cybersecurity" },
+        {
+          to: "/solutions/business-technology/cloud-solutions",
+          label: "Cloud Solutions",
+        },
+        {
+          to: "/solutions/business-technology/cybersecurity",
+          label: "Cybersecurity",
+        },
         {
           to: "/solutions/business-technology/strategy-digitalTransformation",
           label: "Strategy & Digital Transformation",
@@ -87,7 +93,10 @@ function Navbar() {
           to: "/solutions/digital-marketing/content-marketing",
           label: "Email & Content Marketing",
         },
-        { to: "/solutions/digital-marketing/video-marketing", label: "Video Marketing" },
+        {
+          to: "/solutions/digital-marketing/video-marketing",
+          label: "Video Marketing",
+        },
         {
           to: "/solutions/digital-marketing/influencer-marketing",
           label: "Influencer Marketing",
@@ -99,9 +108,21 @@ function Navbar() {
       label: "Case Studies",
       submenu: [
         {
-          to: "/solutions/AIConsulting/AIstrategy",
-          label: "Development Case Studies",
-        }
+          to: "/solutions/casestudies/redingtongulf",
+          label: "Redington- Gulf",
+        },
+        {
+          to: "/solutions/casestudies/microsoft",
+          label: "Microsoft UAE - D365 Campaign",
+        },
+        {
+          to: "/solutions/casestudies/microsoftksa",
+          label: "Microsoft KSA",
+        },
+        {
+          to: "/solutions/casestudies/qatar",
+          label: "Mannai- ǫatar",
+        },
       ],
     },
   ];

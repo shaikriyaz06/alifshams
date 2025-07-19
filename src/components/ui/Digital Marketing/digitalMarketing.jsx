@@ -6,6 +6,8 @@ import genaiImage from "../../../assets/SMM-2.jpg";
 import agenticImage from "../../../assets/EMAIL1.jpg";
 import ethicalImage from "../../../assets/VM1.jpeg";
 import researchImage from "../../../assets/IM1.jpg";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 export default function DigitalMarketing() {
   const [activeService, setActiveService] = useState(0);
@@ -14,36 +16,42 @@ export default function DigitalMarketing() {
     {
       title: "Demand Generation & Sales Pipelines",
       image: strategyImage,
+      link: "/solutions/digital-marketing/demand-generation",
       content:
         "Launch multi-touch digital campaigns, nurture leads through funnels, and optimize conversion.",
     },
     {
       title: "Search Engine Optimization SEO",
       image: customImage,
+      link: "/solutions/digital-marketing/seo",
       content:
         "Enhance organic visibility through technical SEO, keyword strategy, and performance insights.",
     },
     {
       title: "Social Media Marketing (SMM)",
       image: genaiImage,
+      link: "/solutions/digital-marketing/smm",
       content:
         "Curate engaging social content strategies and run targeted ad campaigns across platforms.",
     },
     {
       title: "Email & Content Marketing",
       image: agenticImage,
+      link: "/solutions/digital-marketing/content-marketing",
       content:
         "Develop automated email journeys and SEO-rich, AI-powered blogs, whitepapers, and guides.",
     },
     {
       title: "Video Marketing",
       image: ethicalImage,
+      link: "/solutions/digital-marketing/video-marketing",
       content:
         "Create promotional videos, explainers, reels, and corporate stories that elevate brand recall.",
     },
     {
       title: "Influencer Marketing",
       image: researchImage,
+      link: "/solutions/digital-marketing/influencer-marketing",
       content:
         "Partner with regional influencers to amplify campaigns using vetted creator networks.",
     },
@@ -62,9 +70,12 @@ export default function DigitalMarketing() {
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
         <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">Digital Marketing</h1>
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">
+            Digital Marketing
+          </h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto">
-            We use data, creativity, and technology to power marketing that delivers measurable demand and brand equity.
+            We use data, creativity, and technology to power marketing that
+            delivers measurable demand and brand equity.
           </p>
         </div>
       </section>
@@ -76,7 +87,8 @@ export default function DigitalMarketing() {
             Data-Driven Marketing Excellence
           </h2>
           <p className="text-lg text-gray-300 leading-relaxed">
-            We use data, creativity, and technology to power marketing that delivers measurable demand and brand equity.
+            We use data, creativity, and technology to power marketing that
+            delivers measurable demand and brand equity.
           </p>
         </div>
       </section>
@@ -125,6 +137,13 @@ export default function DigitalMarketing() {
                   <p className="text-gray-700 leading-relaxed">
                     {services[activeService].content}
                   </p>
+                  <div className="mt-5">
+                    <Link to={services[activeService].link}>
+                      <Button className="!bg-[#B31F7E] !text-white">
+                        Know More
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

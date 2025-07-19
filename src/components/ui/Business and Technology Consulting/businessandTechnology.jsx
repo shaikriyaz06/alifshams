@@ -6,6 +6,8 @@ import genaiImage from "../../../assets/cloudSolutions1.webp";
 import agenticImage from "../../../assets/cybersecurity.webp";
 import ethicalImage from "../../../assets/Digital-Transformation.jpg.webp";
 import researchImage from "../../../assets/compliance.jpeg";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 export default function BusinessTechnology() {
   const [activeService, setActiveService] = useState(0);
@@ -14,36 +16,42 @@ export default function BusinessTechnology() {
     {
       title: "Microsoft-related Services",
       image: strategyImage,
+      link: "/solutions/business-technology/microsoft",
       content:
         "Implement Azure Cloud, Microsoft 365, Power Platform, and Copilot AI services.",
     },
     {
       title: "Website Design & Development",
       image: customImage,
+      link: "/solutions/business-technology/website-design",
       content:
         "Craft UX-rich, high-performance websites integrated with analytics and automation.",
     },
     {
       title: "Cloud Solutions",
       image: genaiImage,
+      link: "/solutions/business-technology/cloud-solutions",
       content:
         "Migrate, modernize, and manage workloads across AWS, GCP, and Azure using cost-effective, secure architectures.",
     },
     {
       title: "Cybersecurity",
       image: agenticImage,
+      link: "/solutions/business-technology/cybersecurity",
       content:
         "Conduct risk assessments, build secure access control, implement threat detection, and manage compliance audits.",
     },
     {
       title: "Strategy & Digital Transformation",
       image: ethicalImage,
+      link: "/solutions/business-technology/strategy-digitalTransformation",
       content:
         "Shape business models, redefine service delivery using digital tools, and guide leadership through change journeys.",
     },
     {
       title: "Governance, Risk & Compliance",
       image: researchImage,
+      link: "/solutions/business-technology/risk-compliance",
       content:
         "Develop enterprise governance strategies across IT, data, and AI to ensure ongoing resilience and audit-readiness.",
     },
@@ -62,9 +70,12 @@ export default function BusinessTechnology() {
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
         <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">Business & Technology Consulting</h1>
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">
+            Business & Technology Consulting
+          </h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto">
-            We help enterprises optimize their digital backbone, making them agile, compliant, and customer-centric.
+            We help enterprises optimize their digital backbone, making them
+            agile, compliant, and customer-centric.
           </p>
         </div>
       </section>
@@ -76,7 +87,8 @@ export default function BusinessTechnology() {
             Digital Transformation Excellence
           </h2>
           <p className="text-lg text-gray-300 leading-relaxed">
-            We help enterprises optimize their digital backbone, making them agile, compliant, and customer-centric.
+            We help enterprises optimize their digital backbone, making them
+            agile, compliant, and customer-centric.
           </p>
         </div>
       </section>
@@ -125,6 +137,13 @@ export default function BusinessTechnology() {
                   <p className="text-gray-700 leading-relaxed">
                     {services[activeService].content}
                   </p>
+                  <div className="mt-5">
+                    <Link to={services[activeService].link}>
+                      <Button className="!bg-[#B31F7E] !text-white">
+                        Know More
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

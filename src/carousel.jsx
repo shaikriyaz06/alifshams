@@ -97,15 +97,15 @@ export default function CarouselSliderTailwind() {
   // const translateY = useTransform(newsScrollProgress, [0, 0], ["0%", "0%"]);
   return (
     <section
-      className="w-full py-10 bg-white"
+      className="w-full py-10 "
       ref={sectionRef}
-      style={{
-        backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${backgroundImage1})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "repeat",
-        backgroundAttachment: "fixed",
-      }}
+      // style={{
+      //   backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(${backgroundImage1})`,
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      //   backgroundRepeat: "repeat",
+      //   backgroundAttachment: "fixed",
+      // }}
       data-aos="fade-up"
     >
       <div className="max-w-6xl mx-auto h-auto px-4">
